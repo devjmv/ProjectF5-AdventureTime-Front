@@ -1,0 +1,47 @@
+{
+  "name": "adventuretime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test-w": "vitest",
+    "test:unit": "vitest --environment jsdom",
+    "test-cover": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@vitest/coverage-v8": "^2.0.5",
+    "adventuretime": "file:",
+    "autoprefixer": "^10.4.20",
+    "axios": ">=1.7.4",
+    "pinia": "^2.1.7",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^24.1.0",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0"
+  },
+  "description": "This template should help get you started developing with Vue 3 in Vite.",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/F5-Forking-Around/ProjectF5-AdventureTime-Front.git"
+  },
+  "author": "Forking Around",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/F5-Forking-Around/ProjectF5-AdventureTime-Front/issues"
+  },
+  "homepage": "https://github.com/F5-Forking-Around/ProjectF5-AdventureTime-Front#readme"
+}
