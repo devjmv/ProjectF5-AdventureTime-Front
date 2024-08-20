@@ -6,9 +6,17 @@ export default {
       variants: {},
 
       fontFamily: {
+        gloria: ["Gloria Hallelujah", "cursive"],
+        nunito: ["Nunito", "sans-serif"]
       },
 
-      colors: {},
+      colors: {
+        raisin: "32292f",
+        tiffany: "99e1d9",
+        cream: "f0f7f4",
+        verdigris: "70abaf",
+        wenge: "705d56"
+      },
     },
     plugins: [],
   },
