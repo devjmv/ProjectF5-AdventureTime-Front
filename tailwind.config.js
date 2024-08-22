@@ -7,7 +7,8 @@ export default {
 
       fontFamily: {
         gloria: ["Gloria Hallelujah", "cursive"],
-        nunito: ["Nunito", "sans-serif"]
+        nunito: ["Nunito", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"]
       },
 
       colors: {
@@ -15,7 +16,8 @@ export default {
         tiffany: "99e1d9",
         cream: "f0f7f4",
         verdigris: "70abaf",
-        wenge: "705d56"
+        wenge: "705d56",
+        azulete: "303972"
       },
     },
     plugins: [],
