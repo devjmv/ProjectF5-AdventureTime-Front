@@ -1,9 +1,8 @@
 <script setup>
-import Login from "../components/Login.vue"
 </script>
 
 <template>
-  <Login />
+  <h1>Event</h1>
 </template>
 
 <style>
