@@ -12,12 +12,12 @@ export default {
       },
 
       colors: {
-        raisin: "32292f",
-        tiffany: "99e1d9",
-        cream: "f0f7f4",
-        verdigris: "70abaf",
-        wenge: "705d56",
-        azulete: "303972"
+        raisin: "#32292f",
+        tiffany: "#99e1d9",
+        cream: "#f0f7f4",
+        verdigris: "#70abaf",
+        wenge: "#705d56",
+        azulete: "#303972"
       },
     },
     plugins: [],
