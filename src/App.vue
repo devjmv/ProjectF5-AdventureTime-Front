@@ -11,7 +11,7 @@ const store = useAuthStore()
       <nav>
         <RouterLink to="/home">Home</RouterLink>--
         <RouterLink v-if="store.user.isAuthenticated" to="/event">Event</RouterLink>--
-        <RouterLink v-if="store.user.isAuthenticated" to="/dashboard">dashboard</RouterLink>--
+        <RouterLink v-if="store.user.isAuthenticated && store.user.role == 'ROLE_ADMIN'" to="/dashboard">dashboard</RouterLink>--
         <RouterLink v-if="store.user.isAuthenticated" to="/logout">Logout</RouterLink>
       </nav>
     </div>
