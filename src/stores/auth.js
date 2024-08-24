@@ -9,13 +9,19 @@ export const useAuthStore = defineStore('auth', () => {
     const user = ref(
         {
             username: '',
-            password: '',
+            role: '',
             isAuthenticated: false
         }
     )
+    
+    if (localStorage.getItem("app_user")) {
+        user.username = localStorage.getItem("username");
+        user.role = localStorage.getItem("role");
+        user.isAuthenticated = localStorage.getItem("isAuthenticated");
+    }
 
     function login(username, password) {
-        
+
         const credentials = new Credentials(username, password)
         const service = new AuthService(credentials)
         return service.login()

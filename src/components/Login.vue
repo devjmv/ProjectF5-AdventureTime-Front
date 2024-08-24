@@ -19,10 +19,16 @@ async function login() {
     
     if (response.message == 'Logged') {
         store.user.isAuthenticated = true
-        const redirectPath = route.query.redirect || '/private'
+        store.user.username = response['username']
+        store.user.role = response['roles']
+        localStorage.setItem('username', response['username']);
+        localStorage.setItem('role', response['roles']);
+        localStorage.setItem('isAuthenticated', true);
+        const redirectPath = route.query.redirect || '/event'
         router.push(redirectPath)
     }
 }
+
 </script>
 <template>
     <div class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">

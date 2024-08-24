@@ -3,7 +3,7 @@ import axios from "axios"
 export default class AuthRepository {
 
     constructor() {
-        this.baseUrl = import.meta.env.VITE_API_ENDPOINT_SPRING
+        this.baseUrl = import.meta.env.VITE_API_ENDPOINT
     }
 
     async login(credentials) {
