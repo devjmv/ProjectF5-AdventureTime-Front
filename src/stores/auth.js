@@ -13,12 +13,6 @@ export const useAuthStore = defineStore('auth', () => {
             isAuthenticated: false
         }
     )
-    
-    if (localStorage.getItem("app_user")) {
-        user.username = localStorage.getItem("username");
-        user.role = localStorage.getItem("role");
-        user.isAuthenticated = localStorage.getItem("isAuthenticated");
-    }
 
     function login(username, password) {
 

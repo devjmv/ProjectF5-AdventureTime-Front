@@ -3,26 +3,37 @@ import { useAuthStore } from '../stores/auth'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import EventView from '../views/EventView.vue'
+import LogoutView from '@/views/LogoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      redirect: '/home'
+    },
+    {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { requiresAuth: false }
     },
     {
       path: '/event',
       name: 'event',
       component: EventView,
-      //meta: { requiresAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
-      //meta: { requiresAuth: true }
+      meta: { requiresAuth: true }
+    },{
+      path: '/logout',
+      name: 'logout',
+      component: LogoutView,
+      meta: { requiresAuth: true }
     },
   ]
 })
@@ -31,8 +42,16 @@ router.beforeEach((to, from) => {
 
   const store = useAuthStore()
 
+  if (localStorage.getItem("username") && store.user.username == '') {
+    store.user.username = localStorage.getItem("username");
+    store.user.role = localStorage.getItem("role");
+    store.user.isAuthenticated = localStorage.getItem("isAuthenticated") == "true" ? true : false;
+  }
+
   if (to.meta.requiresAuth && !store.user.isAuthenticated) {
-    return { name: 'about' }
+    return {
+      path: '/home'
+    }
   }
 
 })

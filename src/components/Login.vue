@@ -12,18 +12,22 @@ const router = useRouter()
 
 const store = useAuthStore()
 
-async function login() {
-    const response = await store.login(username.value, password.value)    
+//localStorage.clear();
 
+async function login() {
+    const response = await store.login(username.value, password.value)
     await console.log(response);
     
     if (response.message == 'Logged') {
+
         store.user.isAuthenticated = true
         store.user.username = response['username']
         store.user.role = response['roles']
-        localStorage.setItem('username', response['username']);
-        localStorage.setItem('role', response['roles']);
-        localStorage.setItem('isAuthenticated', true);
+
+        localStorage.setItem('username', response['username'])
+        localStorage.setItem('role', response['roles'])
+        localStorage.setItem('isAuthenticated', "true")
+
         const redirectPath = route.query.redirect || '/event'
         router.push(redirectPath)
     }
