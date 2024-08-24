@@ -16,7 +16,6 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
-      meta: { requiresAuth: false }
     },
     {
       path: '/event',
@@ -28,8 +27,9 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
-      meta: { requiresAuth: true }
-    },{
+      meta: { requiresAuth: true, requiresAuthAdmin: true }
+    },
+    {
       path: '/logout',
       name: 'logout',
       component: LogoutView,
@@ -46,6 +46,12 @@ router.beforeEach((to, from) => {
     store.user.username = localStorage.getItem("username");
     store.user.role = localStorage.getItem("role");
     store.user.isAuthenticated = localStorage.getItem("isAuthenticated") == "true" ? true : false;
+  }
+
+  if (to.meta.requiresAuthAdmin && !(store.user.role == "ROLE_ADMIN")) {
+    return {
+      path: '/home'
+    }
   }
 
   if (to.meta.requiresAuth && !store.user.isAuthenticated) {
