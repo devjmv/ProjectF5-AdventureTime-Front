@@ -1,31 +1,34 @@
 <script setup>
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '../stores/auth';
 import { ref } from 'vue'
 import IconLogo from './icons/IconLogo.vue';
 import Login from './Login.vue';
+import Register from './Register.vue';
 
 const store = useAuthStore()
 const mobileMenuOpen = ref(false)
 //const login = ref(false)
 const open = ref(false)
+const register = ref(false)
 </script>
 <template>
     <header class="bg-white">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-            <div class="flex lg:flex-1">
+        <nav class="flex items-center justify-between p-2 lg:px-8 shadow-lg" aria-label="Global">
+            <div class="flex lg:flex-1 items-center">
                 <RouterLink to="/home">
-                    <span class="sr-only">Adventure Time</span>
                     <IconLogo />
                 </RouterLink>
+                <span class="font-gloria text-2xl ml-3">Adventure Time</span>
             </div>
             <div class="flex lg:hidden">
                 <button type="button"
                     class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                     @click="mobileMenuOpen = true">
                     <span class="sr-only">Open main menu</span>
-                    <IconLogo class="h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
             </div>
             <div class="hidden lg:flex lg:gap-x-12">
@@ -41,9 +44,13 @@ const open = ref(false)
                 </RouterLink>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <a href="#" v-if="!store.user.isAuthenticated" @click="register = true"
+                    class="text-sm font-semibold leading-6 text-gray-900 mr-4">
+                    Register
+                </a>
                 <a href="#" v-if="!store.user.isAuthenticated" @click="open = true"
                     class="text-sm font-semibold leading-6 text-gray-900">
-                    Log in <span aria-hidden="true">&rarr;</span>
+                    Log in
                 </a>
                 <!-- Profile dropdown -->
                 <Menu v-if="store.user.isAuthenticated" as="div" class="relative ml-3">
@@ -75,8 +82,9 @@ const open = ref(false)
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
                             <a href="/logout"
-                                :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign
-                                out</a>
+                                :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                                Logout
+                            </a>
                             </MenuItem>
                         </MenuItems>
                     </transition>
@@ -94,7 +102,7 @@ const open = ref(false)
                     </RouterLink>
                     <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
                         <span class="sr-only">Close menu</span>
-                        <IconLogo class="h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div>
                 <div class="mt-6 flow-root">
@@ -112,31 +120,36 @@ const open = ref(false)
                                 Dashboard
                             </RouterLink>
                         </div>
+                        <div v-if="!store.user.isAuthenticated" class="py-6">
+                            <a href="#" @click="register = true, mobileMenuOpen = false"
+                                class="text-sm font-semibold leading-6 text-gray-900">
+                                Register
+                            </a>
+                        </div>
                         <div class="py-6">
                             <RouterLink v-if="store.user.isAuthenticated" to="/logout" @click="mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
-                                Logout <span aria-hidden="true">&rarr;</span></RouterLink>
-                            <RouterLink v-if="!store.user.isAuthenticated" to="/logout"
-                                @click="open = true, mobileMenuOpen = false"
+                                Logout</RouterLink>
+                            <a href="#" v-if="!store.user.isAuthenticated" @click="open = true, mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Log in
-                            </RouterLink>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </Dialog>
     </header>
-    <TransitionRoot v-if="!store.user.isAuthenticated" as="template" :show="open">
+    <TransitionRoot v-if="!store.user.isAuthenticated" as="login" :show="open">
         <Dialog class="relative z-10" @close="open = false">
-            <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+            <TransitionChild as="login" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </TransitionChild>
 
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
                 <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center">
-                    <TransitionChild as="template" enter="ease-out duration-300"
+                    <TransitionChild as="login" enter="ease-out duration-300"
                         enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
@@ -144,6 +157,29 @@ const open = ref(false)
                         <DialogPanel
                             class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all ">
                             <Login />
+                        </DialogPanel>
+                    </TransitionChild>
+                </div>
+            </div>
+        </Dialog>
+    </TransitionRoot>
+    <TransitionRoot v-if="!store.user.isAuthenticated" as="register" :show="register">
+        <Dialog class="relative z-10" @close="register = false">
+            <TransitionChild as="register" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+                leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center">
+                    <TransitionChild as="register" enter="ease-out duration-300"
+                        enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
+                        leave-from="opacity-100 translate-y-0 sm:scale-100"
+                        leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                        <DialogPanel
+                            class="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all ">
+                            <Register />
                         </DialogPanel>
                     </TransitionChild>
                 </div>

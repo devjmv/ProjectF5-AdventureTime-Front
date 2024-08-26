@@ -6,50 +6,60 @@ import IconLogo from './icons/IconLogo.vue'
 const router = useRouter()
 const name = ref('')
 const password = ref('')
+const passwordAgain = ref('')
+const alertPass = ref(false)
 
 function register() {
-    router.push('/login')
+    if (password.value == passwordAgain.value) {
+        alertPass.value = false;
+        //aqui la funcionalidad de registrar, axios!!
+    }
+    else
+        alertPass.value = true;
 }
 </script>
 <template>
-    <div class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
-        <div aria-hidden="true" class="fixed inset-0 w-full h-full bg-black/50 cursor-pointer">
-            <div class="flex items-center justify-center h-screen px-6">
-                <div class="w-full max-w-sm p-6 bg-white rounded-md shadow-md">
-                    <div class="flex items-center justify-center">
-                        <IconLogo />
-                        <span class="text-2xl font-semibold text-gray-700">Adventure Time</span>
-                    </div>
-
-                    <form class="mt-4" @submit.prevent="register">
-                        <label class="block">
-                            <input v-model="name" type="name" placeholder="Name"
-                                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
-                        </label>
-
-                        <label class="block mt-3">
-                            <input v-model="password" type="password" placeholder="Password"
-                                class="block w-full mt-4 border-tiffany rounded-md focus:border-tiffany focus:ring focus:ring-opacity-40 focus:ring-tiffany">
-                        </label>
-
-                        <label class="block mt-3">
-                            <input v-model="password" type="password" placeholder="Repeat Password"
-                                class="block w-full mt-4 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
-                        </label>
-
-                        <div class="mt-6">
-                            <button type="submit"
-                                class="w-full px-4 py-2 text-sm text-center text-white bg-verdigris rounded-md focus:outline-none hover:bg-tiffany">
-                                Sign Up
-                            </button>
-                        </div>
-                        <div class="flex items-center justify-center mt-4">
-                            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
-                                in</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="w-full max-w-sm p-8 px-12 bg-white rounded-md shadow-md">
+        <div class="flex items-center justify-center">
+            <IconLogo />
+            <span class="font-gloria text-2xl ml-3">Adventure Time</span>
         </div>
+
+        <div class="flex items-center justify-center">
+            <span class="text-2xl font-semibold text-gray-700">Register</span>
+        </div>
+
+        <form class="mt-4" @submit.prevent="register">
+            <label class="block">
+                <input v-model="name" type="name" placeholder="Name"
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+            </label>
+
+            <div v-if="alertPass" class="mt-4 font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
+                data-dismissible="alert">
+                <div class="mr-12">Passwords do not match</div>
+            </div>
+
+            <label class="block mt-3">
+                <input v-model="password" type="password" placeholder="Password"
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+            </label>
+
+            <label class="block mt-3">
+                <input v-model="passwordAgain" type="password" placeholder="Repeat Password"
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+            </label>
+
+            <div class="mt-6">
+                <button type="submit"
+                    class="w-full px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary">
+                    Sign Up
+                </button>
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
+                    in</a>
+            </div>
+        </form>
     </div>
 </template>
