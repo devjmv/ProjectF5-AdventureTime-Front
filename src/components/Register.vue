@@ -17,14 +17,14 @@ function register() {
             <div class="flex items-center justify-center h-screen px-6">
                 <div class="w-full max-w-sm p-6 bg-white rounded-md shadow-md">
                     <div class="flex items-center justify-center">
-                        <IconLogo/>
+                        <IconLogo />
                         <span class="text-2xl font-semibold text-gray-700">Adventure Time</span>
                     </div>
 
                     <form class="mt-4" @submit.prevent="register">
                         <label class="block">
                             <input v-model="name" type="name" placeholder="Name"
-                                class="block w-full mt-4 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
+                                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
                         </label>
 
                         <label class="block mt-3">
@@ -44,7 +44,8 @@ function register() {
                             </button>
                         </div>
                         <div class="flex items-center justify-center mt-4">
-                            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing in</a>
+                            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
+                                in</a>
                         </div>
                     </form>
                 </div>
