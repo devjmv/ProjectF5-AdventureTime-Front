@@ -1,15 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import IconLogo from './icons/IconLogo.vue'
+import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
 
-const router = useRouter()
-const name = ref('')
+const username = ref('')
 const password = ref('')
 
-function register() {
-    router.push('/login')
+const route = useRoute()
+const router = useRouter()
+
+const store = useAuthStore()
+
+//localStorage.clear();
+
+async function login() {
+    const response = await store.login(username.value, password.value)
+    await console.log(response);
+    
+    if (response.message == 'Logged') {
+
+        store.user.isAuthenticated = true
+        store.user.username = response['username']
+        store.user.role = response['roles']
+
+        localStorage.setItem('username', response['username'])
+        localStorage.setItem('role', response['roles'])
+        localStorage.setItem('isAuthenticated', "true")
+
+        const redirectPath = route.query.redirect || '/event'
+        router.push(redirectPath)
+    }
 }
+
 </script>
 <template>
     <div class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
@@ -21,9 +44,9 @@ function register() {
                         <span class="text-2xl font-semibold text-gray-700">Adventure Time</span>
                     </div>
 
-                    <form class="mt-4" @submit.prevent="register">
+                    <form class="mt-4" @submit.prevent="login">
                         <label class="block">
-                            <input v-model="name" type="name" placeholder="Name"
+                            <input v-model="username" type="text" placeholder="User"
                                 class="block w-full mt-4 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
                         </label>
 
@@ -32,21 +55,16 @@ function register() {
                                 class="block w-full mt-4 border-tiffany rounded-md focus:border-tiffany focus:ring focus:ring-opacity-40 focus:ring-tiffany">
                         </label>
 
-                        <label class="block mt-3">
-                            <input v-model="password" type="password" placeholder="Repeat Password"
-                                class="block w-full mt-4 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
-                        </label>
-
                         <div class="mt-6">
                             <button type="submit"
                                 class="w-full px-4 py-2 text-sm text-center text-white bg-verdigris rounded-md focus:outline-none hover:bg-tiffany">
-                                Sign Up
+                                Sign In
                             </button>
                         </div>
-                        <div class="flex items-center justify-center mt-4">
-                            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing in</a>
-                        </div>
                     </form>
+                    <div class="flex items-center justify-center mt-4">
+                        <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are not member? Sing Up</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,18 +1,18 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { useAuthStore } from './stores/auth';
+
+const store = useAuthStore()
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" rc="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/home">Home</RouterLink>--
+        <RouterLink v-if="store.user.isAuthenticated" to="/event">Event</RouterLink>--
+        <RouterLink v-if="store.user.isAuthenticated && store.user.role == 'ROLE_ADMIN'" to="/dashboard">dashboard</RouterLink>--
+        <RouterLink v-if="store.user.isAuthenticated" to="/logout">Logout</RouterLink>
       </nav>
     </div>
   </header>

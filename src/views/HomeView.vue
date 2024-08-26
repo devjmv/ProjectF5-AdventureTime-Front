@@ -1,9 +1,15 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { useAuthStore } from "@/stores/auth";
+import Login from "../components/Login.vue"
+
+const store = useAuthStore()
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Home</h1>
+  <Login v-if="!store.user.isAuthenticated" />
 </template>
+
+<style>
+</style>
