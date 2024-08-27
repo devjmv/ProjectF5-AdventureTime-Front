@@ -13,8 +13,24 @@ const mobileMenuOpen = ref(false)
 //const login = ref(false)
 const open = ref(false)
 const register = ref(false)
+
+function logout() {
+
+    store.user.isAuthenticated = false;
+    store.user.username = "";
+    store.user.role = "";
+
+    localStorage.clear();
+    open.value = false;
+    register.value = false;
+
+    const redirectPath = '/home';
+    router.push(redirectPath);
+}
+
 </script>
 <template>
+    <Logout v-if="logout == true" />
     <header class="bg-white">
         <nav class="flex items-center justify-between p-2 lg:px-8 shadow-lg" aria-label="Global">
             <div class="flex lg:flex-1 items-center">
@@ -81,7 +97,7 @@ const register = ref(false)
                                 :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
-                            <a href="/logout"
+                            <a href="#" @click="logout()"
                                 :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                                 Logout
                             </a>

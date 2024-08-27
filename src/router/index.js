@@ -4,7 +4,6 @@ import DashboardLayout from "../layouts/DashboardLayout.vue";
 import HomeView from "../views/HomeView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import EventView from "../views/EventView.vue";
-import LogoutView from "@/views/LogoutView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import Forms from "../views/Forms.vue";
 
@@ -47,14 +46,7 @@ const router = createRouter({
           component: Forms,
         },
       ],
-    },
-    
-    {
-      path: "/logout",
-      name: "logout",
-      component: LogoutView,
-      meta: { requiresAuth: true },
-    },
+    }
   ],
 });
 
