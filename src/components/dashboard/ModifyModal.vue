@@ -81,11 +81,11 @@ onMounted(() => {
       class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
       @click.self="closeModal"
     >
-      <div class="bg-white rounded-lg shadow-lg w-full max-w-lg">
+      <div class="bg-white rounded-xl shadow-lg w-full max-w-lg">
         <!-- Header -->
         <div class="flex justify-between items-center p-4 border-b">
-          <h2 class="text-2xl font-bold text-gray-950">{{ isEditMode ? 'Edit Event' : 'Add Event' }}</h2>
-          <button @click="closeModal" class="text-gray-600 hover:text-gray-900">
+          <h2 class="text-2xl font-bold text-navy">{{ isEditMode ? 'Edit Event' : 'Add Event' }}</h2>
+          <button @click="closeModal" class="text-gray-600 hover:text-dark">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -97,38 +97,38 @@ onMounted(() => {
           <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-6">
             <!-- Title -->
             <div>
-              <label for="title" class="text-gray-700 font-semibold">Title *</label>
-              <input v-model="event.title" id="title" type="text" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+              <label for="title" class="text-terciary font-bold">Title *</label>
+              <input v-model="event.title" id="title" type="text" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 "/>
             </div>
   
             <!-- Description -->
             <div class="sm:col-span-2">
-              <label for="description" class="text-gray-700 font-semibold">Description *</label>
-              <textarea v-model="event.description" id="description" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40"></textarea>
+              <label for="description" class="text-terciary font-bold">Description *</label>
+              <textarea v-model="event.description" id="description" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600"></textarea>
             </div>
   
             <!-- Image URL -->
             <div class="sm:col-span-2">
-              <label for="imageUrl" class="text-gray-700 font-semibold">Image URL *</label>
-              <input v-model="event.imageUrl" id="imageUrl" type="text" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+              <label for="imageUrl" class="text-terciary font-bold">Image URL *</label>
+              <input v-model="event.imageUrl" id="imageUrl" type="text" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600"/>
             </div>
   
             <!-- Event Date and Time -->
             <div class="sm:col-span-2">
-              <label for="eventDateTime" class="text-gray-700 font-semibold">Event Date & Time *</label>
-              <input v-model="event.eventDateTime" id="eventDateTime" type="datetime-local" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+              <label for="eventDateTime" class="text-terciary font-bold">Event Date & Time *</label>
+              <input v-model="event.eventDateTime" id="eventDateTime" type="datetime-local" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 "/>
             </div>
   
             <!-- Max Participants -->
             <div>
-              <label for="maxParticipants" class="text-gray-700 font-semibold">Max Participants *</label>
-              <input v-model="event.maxParticipants" id="maxParticipants" type="number" required min="1" class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+              <label for="maxParticipants" class="text-terciary font-bold">Max Participants *</label>
+              <input v-model="event.maxParticipants" id="maxParticipants" type="number" required min="1" class="block w-full px-4 py-2 mt-2 text-dark bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600"/>
             </div>
   
             <!-- Is Available -->
             <div>
-              <label for="isAvailable" class="text-gray-700 font-semibold">Is Available *</label>
-              <select v-model="event.isAvailable" id="isAvailable" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40">
+              <label for="isAvailable" class="text-terciary font-bold">Is Available *</label>
+              <select v-model="event.isAvailable" id="isAvailable" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -136,8 +136,8 @@ onMounted(() => {
   
             <!-- Is Featured -->
             <div>
-              <label for="isFeatured" class="text-gray-700 font-semibold">Is Featured *</label>
-              <select v-model="event.isFeatured" id="isFeatured" required class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-300 bg-transparent border border-gray-400 rounded-md focus:ring-gray-400 focus:outline-none focus:ring focus:ring-opacity-40">
+              <label for="isFeatured" class="text-terciary font-bold">Is Featured *</label>
+              <select v-model="event.isFeatured" id="isFeatured" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -146,8 +146,8 @@ onMounted(() => {
   
           <!-- Footer -->
           <div class="flex justify-end mt-4 space-x-4">
-            <button type="button" @click="closeModal" class="px-4 py-2 text-gray-700 bg-transparent border-2 border-gray-700 rounded-full hover:bg-gray-700 hover:text-white">Cancel</button>
-            <button type="submit" :disabled="isSubmitting" class="px-4 py-2 text-white bg-gray-700 border-2 border-gray-700 rounded-full hover:bg-transparent hover:text-gray-700">
+            <button type="button" @click="closeModal" class="px-6 py-2  duration-300 ease-in-out text-primary bg-transparent border-2 border-primary rounded-xl hover:bg-primary hover:text-white hover:scale-110 hover:delay-300">Cancel</button>
+            <button type="submit" :disabled="isSubmitting" class="px-7 py-2  duration-300 ease-in-out text-white bg-primary border-2 border-primary rounded-xl hover:bg-transparent hover:text-primary hover:scale-110 hover:delay-300">
               {{ isEditMode ? 'Save' : 'Save' }}
             </button>
           </div>
