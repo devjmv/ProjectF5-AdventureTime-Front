@@ -80,7 +80,7 @@ export const useEventStore = defineStore("event", {
       }
     },
 
-    async deleteAnimal(id) {
+    async deleteEvent(id) {
       this.isLoading = true;
       try {
         await api.delete(`/delete/${id}`);

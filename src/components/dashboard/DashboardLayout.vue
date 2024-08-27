@@ -5,7 +5,7 @@ import Navbar from '../NavBar.vue'
 
 
 <template>
-    <div class="flex h-screen bg-random-100 font-poppins">
+    <div class="flex h-screen bg-light font-nunito">
       <Sidebar />
   
       <div class="flex-1 flex flex-col overflow-hidden">
