@@ -12,29 +12,32 @@ const textSusses = ref("")
 
 const store = useAuthStore()
 
- async function register() {
-    if (password.value == passwordAgain.value) {
-        try {
-            const response = await store.register(username.value, password.value)
-            console.log(response);
-            
-            if (response){
-                //aqui poner que revice su coprreo!
-                textSusses.value = "Correctly added the user" 
-                textAlert.value = "";
-                username.value = "";
-                password.value = "";
-                passwordAgain.value = "";
-            }
-            else
-                textAlert.value = "There was a problem with the registration!";
+async function register() {
+    if (username.value != '' && password.value != '')
+        if (password.value == passwordAgain.value) {
+            try {
+                const response = await store.register(username.value, password.value)
+                console.log(response);
 
-        } catch (error) {
-            textAlert.value = "Error trying to register, please try again.";
+                if (response) {
+                    //aqui poner que revice su coprreo!
+                    textSusses.value = "Correctly added the user"
+                    textAlert.value = "";
+                    username.value = "";
+                    password.value = "";
+                    passwordAgain.value = "";
+                }
+                else
+                    textAlert.value = "There was a problem with the registration!";
+
+            } catch (error) {
+                textAlert.value = "Error trying to register, please try again.";
+            }
         }
-    }
+        else
+            textAlert.value = "Password not Macht!"
     else
-        textAlert.value = "Password not Macht!"
+        textAlert.value = "User or Password not by null!"
 }
 </script>
 <template>
