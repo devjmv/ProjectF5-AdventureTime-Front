@@ -4,7 +4,7 @@ import NavBar from './components/NavBar.vue';
 import { computed } from 'vue';
 
 const route = useRoute();
-const hiddenPaths = ["/dashboard", "/dashboard/forms", "/dashboard/dashboard"];
+const hiddenPaths = ["/admin", "/admin/forms", "/admin/dashboard"];
 
 const showNavbar = computed(() => {
   return !hiddenPaths.includes(route.path);

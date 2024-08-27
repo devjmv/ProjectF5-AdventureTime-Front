@@ -32,18 +32,18 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: "/dashboard",
+      path: "/admin",
       component: DashboardLayout,
       meta: { requiresAuth: true, requiresAuthAdmin: true },
       children: [
         {
           path: "dashboard",
-          name: "Dashboard",
+          name: "dashboard",
           component: DashboardView,
         },
         {
           path: "forms",
-          name: "Forms",
+          name: "forms",
           component: Forms,
         },
       ],
