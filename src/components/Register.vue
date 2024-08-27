@@ -17,11 +17,10 @@ async function register() {
         if (password.value == passwordAgain.value) {
             try {
                 const response = await store.register(username.value, password.value)
-                console.log(response);
 
-                if (response) {
+                if (response.message == "Register") {
                     //aqui poner que revice su coprreo!
-                    textSusses.value = "Correctly added the user"
+                    textSusses.value = "Correctly added the user " + response.username
                     textAlert.value = "";
                     username.value = "";
                     password.value = "";

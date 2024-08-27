@@ -6,6 +6,7 @@ import { useAuthStore } from '../stores/auth.js'
 
 const username = ref('')
 const password = ref('')
+const textAlert = ref("")
 
 const route = useRoute()
 const router = useRouter()
@@ -13,21 +14,31 @@ const router = useRouter()
 const store = useAuthStore()
 
 async function login() {
-    const response = await store.login(username.value, password.value)
+    if (username.value != '' && password.value != '')
+        try {
+            const response = await store.login(username.value, password.value)
 
-    if (response.message == 'Logged') {
+            if (response.message == 'Logged') {
 
-        store.user.isAuthenticated = true
-        store.user.username = response['username']
-        store.user.role = response['roles']
+                store.user.isAuthenticated = true
+                store.user.username = response['username']
+                store.user.role = response['roles']
 
-        localStorage.setItem('username', response['username'])
-        localStorage.setItem('role', response['roles'])
-        localStorage.setItem('isAuthenticated', "true")
+                localStorage.setItem('username', response['username'])
+                localStorage.setItem('role', response['roles'])
+                localStorage.setItem('isAuthenticated', "true")
 
-        const redirectPath = route.query.redirect || '/event'
-        router.push(redirectPath)
-    }
+                const redirectPath = route.query.redirect || '/event'
+                router.push(redirectPath)
+            }
+            else
+                textAlert.value = "Incorrect username or password!";
+        } catch (error) {
+            textAlert.value = "Error trying to login, please try again.";
+        }
+    else
+        textAlert.value = "User or Password not by null!"
+
 }
 
 </script>
@@ -39,14 +50,21 @@ async function login() {
         </div>
 
         <form class="mt-4" @submit.prevent="login">
+
+            <div v-if="textAlert != ''"
+                class="mt-4 font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
+                data-dismissible="alert">
+                <div class="mr-12">{{ textAlert }}</div>
+            </div>
+
             <label class="block">
                 <input v-model="username" type="text" placeholder="User"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <label class="block mt-3">
                 <input v-model="password" type="password" placeholder="Password"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <div class="mt-6">
