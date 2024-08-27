@@ -51,18 +51,18 @@ onMounted(() => {
 
 <template>
   <div>
-    <h3 class="text-3xl font-semibold text-marron-800">List of Events</h3>
+    <h3 class="text-3xl font-poppins font-semibold text-navy">Event List</h3>
 
     <div class="mt-4">
       <div class="flex flex-wrap -mx-6">
         <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3">
           <div class="flex justify-between px-5 py-6 bg-white rounded-3xl shadow-sm">
             <div class="mx-1">
-              <h4 class="font-semibold text-gray-800">Total events</h4>
+              <h4 class="font-bold font-nunito text-navy">Total events</h4>
             </div>
             <div class="mx-5 text-right">
-              <p class="font-semibold text-random-50">
-                {{ eventStore.event.length }}
+              <p class="font-bold font-nunito text-navy">
+                <!-- {{ eventStore.event.length }} -->
               </p>
             </div>
           </div>
