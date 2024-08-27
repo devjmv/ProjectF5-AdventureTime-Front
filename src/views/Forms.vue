@@ -63,7 +63,7 @@ const cancel = () => {
 
 <template>
   <div class="mt-8">
-    <h3 class="text-3xl font-semibold text-navy">
+    <h3 class="text-3xl font-poppins font-medium text-navy">
       Add event
     </h3>
 
@@ -91,7 +91,7 @@ const cancel = () => {
             <div>
               <label class="text-terciary font-nunito font-bold" for="title">Name *</label>
               <input v-model="title" id="title"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
                 type="text" required placeholder="Event Title" />
             </div>
 
@@ -99,33 +99,33 @@ const cancel = () => {
             <div>
               <label class="text-terciary font-nunito font-bold" for="maxParticipants">Max Participants *</label>
               <input v-model="maxParticipants" id="maxParticipants"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
                 type="number" min="1" required placeholder="100" />
             </div>
 
             <div>
               <label class="text-terciary font-nunito font-bold" for="description">Description *</label>
               <textarea v-model="description" id="description"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
                 required placeholder="Event Description"></textarea>
             </div>
 
             <div>
               <label class="text-terciary font-nunito font-bold" for="eventDateTime">Event Date & Time *</label>
               <input v-model="eventDateTime" id="eventDateTime"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40  placeholder-slate-400"
                 type="datetime-local" required />
             </div>
 
             <div>
               <label class="text-terciary font-nunito font-bold" for="imageUrl">Image URL *</label>
               <input v-model="imageUrl" id="imageUrl"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
                 type="text" required placeholder="https://example.com/image.jpg" />
             </div>
 
 
-            <div>
+            <!-- <div>
               <label class="text-terciary font-nunito font-bold" for="isAvailable">Is Available?</label>
               <input v-model="isAvailable" id="isAvailable"
                 class="block px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 accent-primary bg-transparent border border-primary rounded-sm focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
@@ -137,16 +137,34 @@ const cancel = () => {
               <input v-model="isFeatured" id="isFeatured"
                 class="block px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 accent-primary bg-transparent border border-primary rounded-sm focus:ring-primary focus:outline-primary focus:ring focus:ring-opacity-40"
                 type="checkbox" />
+            </div> -->
+
+            <div>
+              <label for="isAvailable" class="text-terciary font-bold">Is Available *</label>
+              <select v-model="isAvailable" id="isAvailable" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
             </div>
+  
+            
+            <div>
+              <label for="isFeatured" class="text-terciary font-bold">Is Featured *</label>
+              <select v-model="isFeatured" id="isFeatured" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            
           </div>
 
           <div class="flex justify-end mt-4 space-x-4 p-6">
             <button type="button" @click="cancel" :disabled="isSubmitting"
-              class="px-4 py-2 text-primary bg-transparent border-2 border-primary rounded-full hover:bg-primary hover:outline-primary hover:text-white disabled:opacity-50">
+              class="px-7 py-2  duration-300 ease-in-out text-primary bg-transparent border-2 border-primary rounded-xl hover:bg-primary hover:text-white hover:scale-110 hover:delay-300">
               Cancel
             </button>
             <button type="submit" :disabled="isSubmitting"
-              class="px-4 py-2 text-white bg-primary border border-primary rounded-full hover:bg-random-200 disabled:opacity-50">
+              class="px-4 py-2  duration-300 ease-in-out text-white bg-primary border-2 border-primary rounded-xl hover:bg-transparent hover:text-primary hover:scale-110 hover:delay-300">
               {{ isSubmitting ? 'Submitting...' : 'Add Event' }}
             </button>
           </div>

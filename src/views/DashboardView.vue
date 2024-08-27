@@ -56,8 +56,8 @@ const toggleDropdown = () => {
 </script>
 
 <template>
-  <div>
-    <h3 class="text-3xl font-poppins font-semibold text-navy">Event List</h3>
+  <div class="mt-8">
+    <h3 class="text-3xl font-poppins font-medium text-navy">Event List</h3>
 
     <div class="mt-4">
       <div class="flex flex-wrap -mx-6">
