@@ -38,19 +38,15 @@ async function login() {
             <span class="font-gloria text-2xl ml-3">Adventure Time</span>
         </div>
 
-        <div class="flex items-center justify-center">
-            <span class="text-2xl font-semibold text-gray-700">Login</span>
-        </div>
-
         <form class="mt-4" @submit.prevent="login">
             <label class="block">
                 <input v-model="username" type="text" placeholder="User"
-                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <label class="block mt-3">
                 <input v-model="password" type="password" placeholder="Password"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+                class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <div class="mt-6">
@@ -60,8 +56,8 @@ async function login() {
                 </button>
             </div>
         </form>
-        <div class="flex items-center justify-center mt-4">
-            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are not member? Sing Up</a>
+        <div class="flex items-center justify-center mt-4 hidden">
+            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are not member? Sign Up</a>
         </div>
     </div>
 </template>

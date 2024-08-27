@@ -24,4 +24,22 @@ export default class AuthRepository {
             return error.toJSON()
         }
     }
+
+    async register(credentials) {
+        const data = JSON.stringify({
+            "username": credentials.getUsername(),
+            "password": credentials.getPassword()
+        });
+        
+        try {
+            const response = await axios.post(this.baseUrl + '/register', data)
+
+            const data = await response.data
+
+            return data;
+
+        } catch (error) {
+            return error.toJSON()
+        }
+    }
 }
