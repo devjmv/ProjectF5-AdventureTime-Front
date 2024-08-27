@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
 
         const credentials = new Credentials(username, password)
         const service = new RegisterService(credentials)
-        return service.login()
+        return service.register()
 
     }
 

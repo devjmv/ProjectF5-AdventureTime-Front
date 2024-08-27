@@ -4,24 +4,37 @@ import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.js'
 import IconLogo from './icons/IconLogo.vue'
 
-const router = useRouter()
 const username = ref('')
 const password = ref('')
 const passwordAgain = ref('')
-const alertPass = ref(false)
+const textAlert = ref("")
+const textSusses = ref("")
 
 const store = useAuthStore()
 
-async function register() {
+ async function register() {
     if (password.value == passwordAgain.value) {
-        //aqui la funcionalidad de registrar, axios!!
-        const response = await store.register(username.value, password.value)
-        
-        if (response.message == 'Success')
-            alertPass.value = false;
+        try {
+            const response = await store.register(username.value, password.value)
+            console.log(response);
+            
+            if (response){
+                //aqui poner que revice su coprreo!
+                textSusses.value = "Correctly added the user" 
+                textAlert.value = "";
+                username.value = "";
+                password.value = "";
+                passwordAgain.value = "";
+            }
+            else
+                textAlert.value = "There was a problem with the registration!";
+
+        } catch (error) {
+            textAlert.value = "Error trying to register, please try again.";
+        }
     }
     else
-        alertPass.value = true;
+        textAlert.value = "Password not Macht!"
 }
 </script>
 <template>
@@ -37,10 +50,16 @@ async function register() {
                     class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
-            <div v-if="alertPass"
+            <div v-if="textAlert != ''"
                 class="mt-4 font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
                 data-dismissible="alert">
-                <div class="mr-12">Passwords do not match</div>
+                <div class="mr-12">{{ textAlert }}</div>
+            </div>
+
+            <div v-if="textSusses != ''"
+                class="mt-4 font-regular relative block w-full rounded-lg bg-secondary p-4 text-base leading-5 text-dark opacity-100"
+                data-dismissible="alert">
+                <div class="mr-12">{{ textSusses }}</div>
             </div>
 
             <label class="block mt-3">

@@ -26,20 +26,18 @@ export default class AuthRepository {
     }
 
     async register(credentials) {
-        const data = JSON.stringify({
-            "username": credentials.getUsername(),
-            "password": credentials.getPassword()
-        });
-        
         try {
-            const response = await axios.post(this.baseUrl + '/register', data)
+            // Asegúrate de que la URL esté entre comillas
+            const response = await axios.post(this.baseUrl + '/register', {
+                "username": credentials.getUsername(),
+                "password": btoa(credentials.getPassword())
+            })
 
-            const data = await response.data
-
-            return data;
-
+            return response.data;
+    
         } catch (error) {
-            return error.toJSON()
+            console.log('Error during registration:', error);
+            return error.toJSON();
         }
     }
 }
