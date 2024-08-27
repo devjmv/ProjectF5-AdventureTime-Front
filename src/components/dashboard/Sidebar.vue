@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import { useSidebar } from '../../composables/useSidebar'
 import { useRoute } from 'vue-router'
-import IconLogo from '../icons/IconLogo.vue';
-
 const { isOpen } = useSidebar()
 const route = useRoute()
 const activeClass = ref(
@@ -54,7 +52,7 @@ const inactiveClass = ref(
 
       <nav class="mt-10">
         <router-link class="flex items-center px-6 py-4 mt-4 duration-200 border-l-4"
-          :class="route.name === 'Dashboard' ? activeClass : inactiveClass" to="/dashboard">
+          :class="route.name === 'Dashboard' ? activeClass : inactiveClass" to="/dashboard/dashboard">
           <svg :class="route.name === 'Dashboard' ? 'text-navy' : 'text-white group-hover:text-navy'" class="w-6 h-6 fill-current"
             viewBox="0 0 30 34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -65,7 +63,7 @@ const inactiveClass = ref(
           <span class="mx-4 font-nunito text-xl font-bold">Dashboard</span>
         </router-link>
         <router-link class="flex items-center px-6 py-4 mt-4 duration-200 border-l-4"
-          :class="route.name === 'Forms' ? activeClass : inactiveClass" to="/forms">
+          :class="route.name === 'Forms' ? activeClass : inactiveClass" to="/dashboard/forms">
           <svg :class="route.name === 'Forms' ? 'text-navy' : 'text-white group-hover:text-navy'" class="w-6 h-6 fill-current"
             viewBox="0 0 20 20" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
