@@ -7,13 +7,14 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    Authorization: "Basic " + btoa("pepa:password"),
   },
 });
 
 export const useEventStore = defineStore("event", {
   state: () => ({
     events: [],
-    // filteredEvents: [],
+    filteredEvents: [],
     isLoading: false,
     error: null,
   }),
@@ -90,6 +91,16 @@ export const useEventStore = defineStore("event", {
         throw error;
       } finally {
         this.isLoading = false;
+      }
+    },
+
+    applyFilters(events) {
+        if (this.selectedFilters.length === 0) {
+        return events; 
+      } else {
+        return events.filter(event =>
+          this.selectedFilters.includes(event.featured) 
+        );
       }
     },
   },
