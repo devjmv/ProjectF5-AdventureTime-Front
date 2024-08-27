@@ -17,6 +17,7 @@ export const useEventStore = defineStore("event", {
     filteredEvents: [],
     isLoading: false,
     error: null,
+    selectedFilters: [],
   }),
 
   actions: {
@@ -25,7 +26,7 @@ export const useEventStore = defineStore("event", {
       this.error = null;
       try {
         const response = await api.get("/all");
-        this.event = response.data;
+        this.events = response.data;
         this.filteredEvents = response.data;
       } catch (error) {
         this.error = "Error fetching events: " + error.message;
@@ -40,7 +41,7 @@ export const useEventStore = defineStore("event", {
       this.error = null;
       try {
         const response = await api.get("/featured");
-        this.event = response.data;
+        this.events = response.data;
       } catch (error) {
         this.error = "Error fetching types: " + error.message;
         console.error(this.error);
