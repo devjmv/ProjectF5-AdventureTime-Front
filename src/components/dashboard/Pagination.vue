@@ -2,10 +2,9 @@
     <div class="grid min-h-[60px] w-full place-items-end p-6 lg:overflow-visible bg-white">
       <nav>
         <ul class="flex">
-          <!-- Botón de página anterior -->
           <li>
             <a
-              class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+              class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-gray-500 transition duration-150 ease-in-out hover:bg-secondary"
               href="#"
               @click.prevent="goToPage(currentPage - 1)"
               :aria-disabled="currentPage === 1 ? 'true' : 'false'"
@@ -15,14 +14,13 @@
             </a>
           </li>
   
-          <!-- Botones de páginas -->
           <li v-for="page in pages" :key="page">
             <a
               :class="[
                 'mx-1 flex h-9 w-9 items-center justify-center rounded-full p-0 text-sm transition duration-150 ease-in-out',
                 page === currentPage
-                  ? 'bg-random-50 text-white shadow-md'
-                  : 'border border-random-50 bg-transparent text-blue-gray-500 hover:bg-light-300'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'border border-primary bg-transparent text-gray-500 hover:bg-secondary'
               ]"
               href="#"
               @click.prevent="goToPage(page)"
@@ -31,10 +29,9 @@
             </a>
           </li>
   
-          <!-- Botón de página siguiente -->
           <li>
             <a
-              class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out hover:bg-light-300"
+              class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-transparent p-0 text-sm text-gray-500 transition duration-150 ease-in-out hover:bg-secondary"
               href="#"
               @click.prevent="goToPage(currentPage + 1)"
               :aria-disabled="currentPage === totalPages ? 'true' : 'false'"
@@ -49,7 +46,7 @@
   </template>
   
   <script setup>
-  import { computed, defineEmits, defineProps } from 'vue';
+  import { computed } from 'vue';
   
   const props = defineProps({
     currentPage: Number,
@@ -92,7 +89,6 @@
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-    -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
   </style>
