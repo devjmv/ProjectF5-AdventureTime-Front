@@ -5,6 +5,8 @@ import DashboardView from '../views/DashboardView.vue'
 import EventView from '../views/EventView.vue'
 import LogoutView from '@/views/LogoutView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import Forms from '../views/Forms.vue'
+import LayoutView from '@/views/LayoutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,10 +38,22 @@ const router = createRouter({
       meta: { requiresAuth: true, requiresAuthAdmin: true }
     },
     {
+      path: '/layout',
+      name: 'layout',
+      component: LayoutView,
+      meta: { requiresAuth: true, requiresAuthAdmin: true }
+    },
+    {
       path: '/logout',
       name: 'logout',
       component: LogoutView,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/forms',
+      name: 'Forms',
+      component: Forms,
+      meta: { requiresAuth: true, requiresAuthAdmin: true },
     },
   ]
 })
