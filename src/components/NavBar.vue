@@ -40,7 +40,7 @@ const register = ref(false)
                     Event</RouterLink>
                 <RouterLink v-if="store.user.isAuthenticated && store.user.role == 'ROLE_ADMIN'" to="/dashboard"
                     class="text-sm font-semibold leading-6 text-gray-900">
-                    dashboard
+                    Dashboard
                 </RouterLink>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
