@@ -1,21 +1,42 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
 import IconLogo from './icons/IconLogo.vue'
 
-const router = useRouter()
-const name = ref('')
+const username = ref('')
 const password = ref('')
 const passwordAgain = ref('')
-const alertPass = ref(false)
+const textAlert = ref("")
+const textSusses = ref("")
 
-function register() {
-    if (password.value == passwordAgain.value) {
-        alertPass.value = false;
-        //aqui la funcionalidad de registrar, axios!!
-    }
+const store = useAuthStore()
+
+async function register() {
+    if (username.value != '' && password.value != '')
+        if (password.value == passwordAgain.value) {
+            try {
+                const response = await store.register(username.value, password.value)
+
+                if (response.message == "Register") {
+                    //aqui poner que revice su coprreo!
+                    textSusses.value = "Correctly added the user " + response.username
+                    textAlert.value = "";
+                    username.value = "";
+                    password.value = "";
+                    passwordAgain.value = "";
+                }
+                else
+                    textAlert.value = "There was a problem with the registration!";
+
+            } catch (error) {
+                textAlert.value = "Error trying to register, please try again.";
+            }
+        }
+        else
+            textAlert.value = "Password not Macht!"
     else
-        alertPass.value = true;
+        textAlert.value = "User or Password not by null!"
 }
 </script>
 <template>
@@ -25,29 +46,32 @@ function register() {
             <span class="font-gloria text-2xl ml-3">Adventure Time</span>
         </div>
 
-        <div class="flex items-center justify-center">
-            <span class="text-2xl font-semibold text-gray-700">Register</span>
-        </div>
-
         <form class="mt-4" @submit.prevent="register">
             <label class="block">
-                <input v-model="name" type="name" placeholder="Name"
-                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+                <input v-model="username" type="username" placeholder="Name"
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
-            <div v-if="alertPass" class="mt-4 font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
+            <div v-if="textAlert != ''"
+                class="mt-4 font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
                 data-dismissible="alert">
-                <div class="mr-12">Passwords do not match</div>
+                <div class="mr-12">{{ textAlert }}</div>
+            </div>
+
+            <div v-if="textSusses != ''"
+                class="mt-4 font-regular relative block w-full rounded-lg bg-secondary p-4 text-base leading-5 text-dark opacity-100"
+                data-dismissible="alert">
+                <div class="mr-12">{{ textSusses }}</div>
             </div>
 
             <label class="block mt-3">
                 <input v-model="password" type="password" placeholder="Password"
-                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <label class="block mt-3">
                 <input v-model="passwordAgain" type="password" placeholder="Repeat Password"
-                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-tiffany rounded-md focus:ring-tiffany focus:outline-azulete focus:ring focus:ring-opacity-40">
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
             </label>
 
             <div class="mt-6">
@@ -56,7 +80,7 @@ function register() {
                     Sign Up
                 </button>
             </div>
-            <div class="flex items-center justify-center mt-4">
+            <div class="flex items-center justify-center mt-4 hidden">
                 <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
                     in</a>
             </div>
