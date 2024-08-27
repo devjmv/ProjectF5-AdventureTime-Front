@@ -1,23 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { useAuthStore } from './stores/auth';
-
-const store = useAuthStore()
+import { RouterView } from 'vue-router'
+import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/home">Home</RouterLink>--
-        <RouterLink v-if="store.user.isAuthenticated" to="/event">Event</RouterLink>--
-        <RouterLink v-if="store.user.isAuthenticated && store.user.role == 'ROLE_ADMIN'" to="/dashboard">dashboard</RouterLink>--
-        <RouterLink v-if="store.user.isAuthenticated" to="/logout">Logout</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+  <NavBar />
   <RouterView />
 </template>
-
-
