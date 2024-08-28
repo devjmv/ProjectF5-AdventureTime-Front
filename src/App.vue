@@ -10,8 +10,6 @@ const showNavbar = computed(() => {
   return !hiddenPaths.includes(route.path);
 });
 
-console.log(showNavbar.value);
-
 </script>
 
 <template>
