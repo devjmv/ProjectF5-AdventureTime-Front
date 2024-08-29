@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/v1/event";
+const BASE_URL = import.meta.env.VITE_API_ENDPOINT
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -25,7 +25,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await api.get("/all");
+        const response = await api.get("/home/allevent");
         this.events = response.data;
         this.filteredEvents = response.data;
       } catch (error) {
@@ -40,7 +40,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await api.get("/featured");
+        const response = await api.get("/home/eventfeatured");
         this.events = response.data;
       } catch (error) {
         this.error = "Error fetching types: " + error.message;
@@ -54,7 +54,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await api.post("/add", newEvent);
+        const response = await api.post("/event/add", newEvent);
         this.fetchEvents();
         return response.data;
       } catch (error) {
@@ -70,7 +70,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        await api.put(`/update/${id}`, updatedEvent);
+        await api.put(`/event/update/${id}`, updatedEvent);
         this.fetchEvents();
       } catch (error) {
         this.error = "Error updating event: " + error.message;
@@ -84,7 +84,7 @@ export const useEventStore = defineStore("event", {
     async deleteEvent(id) {
       this.isLoading = true;
       try {
-        await api.delete(`/delete/${id}`);
+        await api.delete(`/event/delete/${id}`);
         this.fetchEvents();
       } catch (error) {
         this.error = "Error deleting event: " + error.message;

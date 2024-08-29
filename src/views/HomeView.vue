@@ -1,13 +1,10 @@
 <script setup>
-import CardEvent from '@/components/CardEvent.vue';
-import background from '@/assets/img/background.webp';
+import Carrusel from '@/components/Carrusel.vue';
 </script>
 
 <template>
-  <div class="h-screen w-screen hidden bg-cover lg:block flex justify-center items-center"
-  :style="{ backgroundImage: `url(${background})` }">
-    <CardEvent />
-  </div>
+  <h1>Home</h1>
+  <Carrusel />
 </template>
 
 <style scoped>

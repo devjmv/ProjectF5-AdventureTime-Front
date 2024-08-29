@@ -1,17 +1,17 @@
 <script setup>
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth';
 import { ref } from 'vue'
 import IconLogo from './icons/IconLogo.vue';
 import Login from './Login.vue';
 import Register from './Register.vue';
 
+const router = useRouter()
 const store = useAuthStore()
 const mobileMenuOpen = ref(false)
-//const login = ref(false)
-const open = ref(false)
+const login = ref(false)
 const register = ref(false)
 
 function logout() {
@@ -21,7 +21,7 @@ function logout() {
     store.user.role = "";
 
     localStorage.clear();
-    open.value = false;
+    login.value = false;
     register.value = false;
 
     const redirectPath = '/home';
@@ -30,7 +30,6 @@ function logout() {
 
 </script>
 <template>
-    <Logout v-if="logout == true" />
     <header class="bg-white">
         <nav class="flex items-center justify-between p-2 lg:px-8 shadow-lg" aria-label="Global">
             <div class="flex lg:flex-1 items-center">
@@ -64,7 +63,7 @@ function logout() {
                     class="text-sm font-semibold leading-6 text-gray-900 mr-4">
                     Register
                 </a>
-                <a href="#" v-if="!store.user.isAuthenticated" @click="open = true"
+                <a href="#" v-if="!store.user.isAuthenticated" @click="login = true"
                     class="text-sm font-semibold leading-6 text-gray-900">
                     Log in
                 </a>
@@ -146,7 +145,7 @@ function logout() {
                             <RouterLink v-if="store.user.isAuthenticated" to="/logout" @click="mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Logout</RouterLink>
-                            <a href="#" v-if="!store.user.isAuthenticated" @click="open = true, mobileMenuOpen = false"
+                            <a href="#" v-if="!store.user.isAuthenticated" @click="login = true, mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Log in
                             </a>
@@ -156,8 +155,8 @@ function logout() {
             </div>
         </Dialog>
     </header>
-    <TransitionRoot v-if="!store.user.isAuthenticated" as="login" :show="open">
-        <Dialog class="relative z-10" @close="open = false">
+    <TransitionRoot v-if="!store.user.isAuthenticated" as="login" :show="login">
+        <Dialog class="relative z-10" @close="login = false">
             <TransitionChild as="login" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
