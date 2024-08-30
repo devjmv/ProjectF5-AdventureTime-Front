@@ -28,7 +28,7 @@ const currentIndex = ref(0);
 
 const fetchImages = async () => {
   try {
-    const response = await axios.get('http://localhost:8080/api/v1/home/eventfeatured');
+    const response = await axios.get('http://localhost:8080/api/v1/event/featured');
     images.value = response.data;
   } catch (error) {
     console.error('Error fetching images:', error);
@@ -46,7 +46,7 @@ const prevSlide = () => {
 
 onMounted(async () => {
   await fetchImages();
-  setInterval(nextSlide, 2000);
+  setInterval(nextSlide, 3500);
 });
 </script>
 
