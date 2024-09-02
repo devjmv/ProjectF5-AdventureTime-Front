@@ -2,9 +2,13 @@ import { defineStore } from "pinia";
 
 export const registerUserInEvent = defineStore('register', () => {
 
-    function register(userid, eventid) {
+    function subscribe(userid, eventid) {
       return userid + eventid
     }
 
-    return { register }
+    function unsubscribe(userid, eventid) {
+      return userid + " + " + eventid
+    }
+
+    return { unsubscribe, subscribe }
 })
