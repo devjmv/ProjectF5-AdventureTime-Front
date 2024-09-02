@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { loginChange } from '../stores/loginChange';
 import { useAuthStore } from '../stores/auth.js'
 import IconLogo from './icons/IconLogo.vue'
 
@@ -11,6 +11,13 @@ const textAlert = ref("")
 const textSusses = ref("")
 
 const store = useAuthStore()
+
+const modificarLogin = () => {
+    if (loginChange.login == false)
+        loginChange.setLogin(true);
+    else
+        loginChange.setLogin(false);
+};
 
 async function register() {
     if (username.value != '' && password.value != '')
@@ -80,8 +87,8 @@ async function register() {
                     Sign Up
                 </button>
             </div>
-            <div class="flex items-center justify-center mt-4 hidden">
-                <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
+            <div class="flex items-center justify-center mt-4">
+                <a @click="modificarLogin" class="block text-sm text-verdigris fontme hover:underline" href="#">You are member? Sing
                     in</a>
             </div>
         </form>
