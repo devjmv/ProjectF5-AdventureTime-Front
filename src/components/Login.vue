@@ -2,7 +2,8 @@
 import IconLogo from './icons/IconLogo.vue'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth.js'
+import { useAuthStore } from '@/stores/auth.js'
+import { loginChange } from '@/stores/loginChange';
 
 const username = ref('')
 const password = ref('')
@@ -13,6 +14,13 @@ const router = useRouter()
 
 const store = useAuthStore()
 
+const modificarRegister = () => {
+    if (loginChange.register == false)
+        loginChange.setRegister(true);
+    else
+        loginChange.setRegister(false);
+};
+
 async function login() {
     if (username.value != '' && password.value != '')
         try {
@@ -20,10 +28,12 @@ async function login() {
 
             if (response.message == 'Logged') {
 
+                store.user.id = response['id']
                 store.user.isAuthenticated = true
                 store.user.username = response['username']
                 store.user.role = response['roles']
 
+                localStorage.setItem('id', response['id'])
                 localStorage.setItem('username', response['username'])
                 localStorage.setItem('role', response['roles'])
                 localStorage.setItem('isAuthenticated', "true")
@@ -74,8 +84,8 @@ async function login() {
                 </button>
             </div>
         </form>
-        <div class="flex items-center justify-center mt-4 hidden">
-            <a class="block text-sm text-verdigris fontme hover:underline" href="#">You are not member? Sign Up</a>
+        <div class="flex items-center justify-center mt-4">
+            <a @click="modificarRegister" class="block text-sm text-verdigris fontme hover:underline" href="#">You are not member? Sign Up</a>
         </div>
     </div>
 </template>

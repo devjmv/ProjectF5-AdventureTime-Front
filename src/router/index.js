@@ -54,6 +54,7 @@ router.beforeEach((to, from) => {
   const store = useAuthStore();
 
   if (localStorage.getItem("username") && store.user.username == "") {
+    store.user.id = localStorage.getItem("id");
     store.user.username = localStorage.getItem("username");
     store.user.role = localStorage.getItem("role");
     store.user.isAuthenticated =

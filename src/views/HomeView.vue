@@ -1,5 +1,6 @@
 <script setup>
 import Carrusel from '@/components/Carrusel.vue';
+import RegisterIn from '@/components/RegisterIn.vue';
 </script>
 
 <template>

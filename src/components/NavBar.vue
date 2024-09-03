@@ -3,26 +3,39 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot, Menu, MenuButton,
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth';
-import { ref } from 'vue'
+import { loginChange } from '../stores/loginChange';
 import IconLogo from './icons/IconLogo.vue';
 import Login from './Login.vue';
 import Register from './Register.vue';
 
 const router = useRouter()
 const store = useAuthStore()
-const mobileMenuOpen = ref(false)
-const login = ref(false)
-const register = ref(false)
+const mobileMenuOpen = loginChange.login
+
+const modificarLogin = () => {
+    if (loginChange.login == false)
+        loginChange.setLogin(true);
+    else
+        loginChange.setLogin(false);
+};
+
+const modificarRegister = () => {
+    if (loginChange.register == false)
+        loginChange.setRegister(true);
+    else
+        loginChange.setRegister(false);
+};
 
 function logout() {
 
     store.user.isAuthenticated = false;
+    store.user.id = "";
     store.user.username = "";
     store.user.role = "";
 
     localStorage.clear();
-    login.value = false;
-    register.value = false;
+    loginChange.setLogin(false);
+    loginChange.setRegister(false);
 
     const redirectPath = '/home';
     router.push(redirectPath);
@@ -59,11 +72,11 @@ function logout() {
                 </RouterLink>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="#" v-if="!store.user.isAuthenticated" @click="register = true"
+                <a href="#" v-if="!store.user.isAuthenticated" @click="modificarRegister"
                     class="text-sm font-semibold leading-6 text-gray-900 mr-4">
                     Register
                 </a>
-                <a href="#" v-if="!store.user.isAuthenticated" @click="login = true"
+                <a href="#" v-if="!store.user.isAuthenticated" @click="modificarLogin"
                     class="text-sm font-semibold leading-6 text-gray-900">
                     Log in
                 </a>
@@ -136,7 +149,7 @@ function logout() {
                             </RouterLink>
                         </div>
                         <div v-if="!store.user.isAuthenticated" class="py-6">
-                            <a href="#" @click="register = true, mobileMenuOpen = false"
+                            <a href="#" @click="modificarRegister, mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Register
                             </a>
@@ -145,7 +158,8 @@ function logout() {
                             <RouterLink v-if="store.user.isAuthenticated" to="/logout" @click="mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Logout</RouterLink>
-                            <a href="#" v-if="!store.user.isAuthenticated" @click="login = true, mobileMenuOpen = false"
+                            <a href="#" v-if="!store.user.isAuthenticated"
+                                @click="modificarLogin, mobileMenuOpen = false"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Log in
                             </a>
@@ -155,8 +169,8 @@ function logout() {
             </div>
         </Dialog>
     </header>
-    <TransitionRoot v-if="!store.user.isAuthenticated" as="login" :show="login">
-        <Dialog class="relative z-10" @close="login = false">
+    <TransitionRoot v-if="!store.user.isAuthenticated" as="login" :show="loginChange.login">
+        <Dialog class="relative z-10" @close="modificarLogin">
             <TransitionChild as="login" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -178,8 +192,8 @@ function logout() {
             </div>
         </Dialog>
     </TransitionRoot>
-    <TransitionRoot v-if="!store.user.isAuthenticated" as="register" :show="register">
-        <Dialog class="relative z-10" @close="register = false">
+    <TransitionRoot v-if="!store.user.isAuthenticated" as="register" :show="loginChange.register">
+        <Dialog class="relative z-10" @close="modificarRegister">
             <TransitionChild as="register" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
