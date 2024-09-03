@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const user = ref(
         {
+            id:'',
             username: '',
             role: '',
             isAuthenticated: false
