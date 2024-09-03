@@ -3,15 +3,15 @@ import { useHomeEventStore } from '@/stores/homeEventStore';
 import { computed, onMounted } from 'vue';
 import Card from './Card.vue';
 
-const homeEventStore = useHomeEventStore();
-
-const { fetchEvents, events, isLoading, error, currentPage, pageSize, totalEvents } = homeEventStore;
-
-const eventsToShow = computed(() => events);
+const eventStore = useHomeEventStore();
 
 onMounted(() => {
-    fetchEvents(currentPage, pageSize);
-})
+    eventStore.fetchEvents();
+});
+
+const isLoading = computed(() => eventStore.isLoading);
+const error = computed(() => eventStore.error);
+const eventsToShow = computed(() => eventStore.events);
 
 </script>
 

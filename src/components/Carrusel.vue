@@ -12,8 +12,8 @@
       >
         <img :src="image.imageUrl" :alt="image.title" class="max-h-full max-w-full object-contain rounded-[20px]" />
         <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 text-center text-white bg-black bg-opacity-50 p-2 rounded-[10px]">
-          <h3>{{ image.title }}</h3>
-          <p>{{ image.description }}</p>
+          <!-- <h3>{{ image.title }}</h3>
+          <p>{{ image.description }}</p> -->
         </div>
       </div>
       <button @click="nextSlide" class="absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-4 py-2 cursor-pointer z-10 right-64">
