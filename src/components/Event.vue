@@ -24,7 +24,7 @@ const eventsToShow = computed(() => eventStore.events);
         <ul v-if="!isLoading && !error">
             <li v-for="(event, index) in eventsToShow" :key="index">
                 <Card :id="event.id" :title="event.title" :eventDateTime="event.eventDateTime"
-                    :maxParticipants="event.maxParticipants" :description="event.description"
+                    :maxParticipants="event.maxParticipants" :participantsCount="event.participantsCount" :description="event.description"
                     :imageUrl="event.imageUrl" />
             </li>
         </ul>
