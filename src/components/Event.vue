@@ -1,4 +1,17 @@
 <script setup>
+import { useHomeEventStore } from '@/stores/homeEventStore';
+import { computed, onMounted } from 'vue';
+import Card from './Card.vue';
+
+const homeEventStore = useHomeEventStore();
+
+const { fetchEvents, events, isLoading, error, currentPage, pageSize, totalEvents } = homeEventStore;
+
+const eventsToShow = computed(() => events);
+
+onMounted(() => {
+    fetchEvents(currentPage, pageSize);
+})
 
 </script>
 
