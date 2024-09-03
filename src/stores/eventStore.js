@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Basic " + btoa("pepa:password"),
+   /*  Authorization: "Basic " + btoa("pepa:password"), */
   },
 });
 
@@ -25,7 +25,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await api.get("/home/allevent");
+        const response = await api.get("/event/all");
         this.events = response.data;
         this.filteredEvents = response.data;
       } catch (error) {
@@ -40,7 +40,7 @@ export const useEventStore = defineStore("event", {
       this.isLoading = true;
       this.error = null;
       try {
-        const response = await api.get("/home/eventfeatured");
+        const response = await api.get("/event/featured");
         this.events = response.data;
       } catch (error) {
         this.error = "Error fetching types: " + error.message;

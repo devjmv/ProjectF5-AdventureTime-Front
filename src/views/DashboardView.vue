@@ -68,7 +68,7 @@ const toggleDropdown = () => {
             </div>
             <div class="mx-5 text-right">
               <p class="font-bold font-nunito text-navy">
-                 {{ eventStore.events.length }}
+                {{ eventStore.events.length }}
               </p>
             </div>
           </div>
@@ -166,8 +166,8 @@ const toggleDropdown = () => {
                 </td>
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="text-sm leading-5 text-gray-900">
-                  // TODO: add slots
-                    <!-- {{ event.maxParticipants }} --> 
+                    // TODO: add slots
+                    <!-- {{ event.maxParticipants }} -->
                   </div>
                 </td>
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
