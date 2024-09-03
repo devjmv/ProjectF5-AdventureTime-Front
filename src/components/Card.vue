@@ -1,4 +1,5 @@
 <script setup>
+
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -27,6 +28,7 @@ const props = defineProps({
     required: true
   }
 });
+
 </script>
 
 <template>
