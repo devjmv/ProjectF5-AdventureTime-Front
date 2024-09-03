@@ -28,10 +28,12 @@ async function login() {
 
             if (response.message == 'Logged') {
 
+                store.user.id = response['id']
                 store.user.isAuthenticated = true
                 store.user.username = response['username']
                 store.user.role = response['roles']
 
+                localStorage.setItem('id', response['id'])
                 localStorage.setItem('username', response['username'])
                 localStorage.setItem('role', response['roles'])
                 localStorage.setItem('isAuthenticated', "true")

@@ -29,6 +29,7 @@ const modificarRegister = () => {
 function logout() {
 
     store.user.isAuthenticated = false;
+    store.user.id = "";
     store.user.username = "";
     store.user.role = "";
 
