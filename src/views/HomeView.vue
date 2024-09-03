@@ -5,7 +5,7 @@ import RegisterIn from '@/components/RegisterIn.vue';
 
 <template>
   <h1>Home</h1>
-
+  <Carrusel />  
 </template>
 
 <style>
