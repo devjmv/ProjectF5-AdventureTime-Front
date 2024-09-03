@@ -2,8 +2,8 @@
 import IconLogo from './icons/IconLogo.vue'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth.js'
-import { loginChange } from '../stores/loginChange';
+import { useAuthStore } from '@/stores/auth.js'
+import { loginChange } from '@/stores/loginChange';
 
 const username = ref('')
 const password = ref('')

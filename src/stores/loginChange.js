@@ -1,7 +1,6 @@
 import { reactive, ref } from 'vue';
 
 export const loginChange = reactive({
-    // Propiedades compartidas
     login: ref(false),
     register: ref(false),
 

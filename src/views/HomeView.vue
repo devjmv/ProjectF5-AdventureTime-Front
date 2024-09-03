@@ -5,8 +5,8 @@ import RegisterIn from '@/components/RegisterIn.vue';
 
 <template>
   <h1>Home</h1>
-  <RegisterIn :available="true" :eventId="1" :userId="3"/>
-  <RegisterIn :available="false" :eventId="2" :userId="1"/>
+  <RegisterIn :available="true" :issubscribe="true" :eventId="1" :userId="2"/>
+  <RegisterIn :available="true" :issubscribe="false" :eventId="1" :userId="2"/>
 </template>
 
 <style>

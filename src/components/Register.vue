@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { loginChange } from '../stores/loginChange';
-import { useAuthStore } from '../stores/auth.js'
+import { loginChange } from '@/stores/loginChange';
+import { useAuthStore } from '@/stores/auth.js'
 import IconLogo from './icons/IconLogo.vue'
 
 const username = ref('')
