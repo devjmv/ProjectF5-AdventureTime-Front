@@ -34,29 +34,28 @@ const goToPage = (page) => {
             </li>
         </ul>
 
-        <div v-if="!isLoading && !error" class="pagination-controls">
-            <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 0">
-                Previous
-            </button>
-            <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
-            <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages - 1">
-                Next
-            </button>
+        <div class="flex justify-center align-middle mt-10">
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 0"
+                    class="bg-primary relative inline-flex items-center rounded-l-md px-2 py-2 text-white ring-1 ring-inset ring-gray-300 hover:bg-secondary hover:text-dark focus:z-20 focus:outline-offset-0">
+                    &lt;
+                </button>
+                <span
+                    class="bg-white relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
+                    Page {{ currentPage + 1 }} of {{ totalPages }}
+                </span>
+                <!-- <a href="#"
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</a>-->
+                <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages - 1"
+                    class="bg-primary relative inline-flex items-center rounded-r-md px-2 py-2 text-white ring-1 ring-inset ring-gray-300 hover:bg-secondary hover:text-dark focus:z-20 focus:outline-offset-0">
+                    &gt;
+                </button>
+            </nav>
         </div>
     </div>
 </template>
 
 <style scoped>
-.pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.pagination-controls button {
-    margin: 0 10px;
-}
 </style>
 <!-- <script setup>
 import { useHomeEventStore } from '@/stores/homeEventStore';

@@ -58,15 +58,15 @@ async function unSubscribe() {
     Full seats
   </button>
   <button v-if="available && !authStore.user.isAuthenticated" @click="modificarLogin"
-    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary">
+    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Log to subscribe
   </button>
   <button v-if="available && authStore.user.isAuthenticated && !issubscribe" @click="subscribe"
-    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary">
+    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Subscribe
   </button>
   <button v-if="available && authStore.user.isAuthenticated && issubscribe" @click="unSubscribe"
-    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary">
+    class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Unsubscribe
   </button>
 </template>
