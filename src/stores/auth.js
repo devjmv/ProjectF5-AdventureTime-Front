@@ -1,8 +1,8 @@
 import { ref, reactive } from "vue";
 import { defineStore } from "pinia";
 import AuthService from "../core/apis/spring/auth/AuthService";
-import Credentials from "../core/models/Credentials";
 import RegisterService from "@/core/apis/spring/auth/RegisterService";
+import Credentials from "@/core/models/Credentials";
 
 
 export const useAuthStore = defineStore('auth', () => {
@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
         {
             id:'',
             username: '',
+            email: '',
             role: '',
             isAuthenticated: false
         }
@@ -24,10 +25,10 @@ export const useAuthStore = defineStore('auth', () => {
 
     }
 
-    function register(username, password) {
+    function register(username, email, password) {
 
-        const credentials = new Credentials(username, password)
-        const service = new RegisterService(credentials)
+        const credentialsRegister = new Credentials(username, email, password )
+        const service = new RegisterService(credentialsRegister)
         return service.register()
 
     }

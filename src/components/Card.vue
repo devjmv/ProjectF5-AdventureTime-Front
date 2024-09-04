@@ -53,7 +53,7 @@ const props = defineProps({
         Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
       </p>
       <div class="flex justify-center mt-10 w-full">
-        <RegisterIn :available="maxParticipants == participantsCount ? false : true" :issubscribe="false" :eventId="props.id" :userId="authStore.id" />
+        <RegisterIn :available="maxParticipants == participantsCount ? false : true" :issubscribe="false" :eventId="props.id" :userId="authStore.user.id" />
       </div>
     </div>
   </div>

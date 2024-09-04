@@ -37,6 +37,7 @@ async function login() {
                 localStorage.setItem('username', response['username'])
                 localStorage.setItem('role', response['roles'])
                 localStorage.setItem('isAuthenticated', "true")
+                localStorage.setItem('token', btoa(`${username.value}:${password.value}`))
 
                 const redirectPath = route.query.redirect || '/event'
                 router.push(redirectPath)

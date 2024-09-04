@@ -57,8 +57,8 @@ router.beforeEach((to, from) => {
     store.user.id = localStorage.getItem("id");
     store.user.username = localStorage.getItem("username");
     store.user.role = localStorage.getItem("role");
-    store.user.isAuthenticated =
-      localStorage.getItem("isAuthenticated") == "true" ? true : false;
+    store.user.isAuthenticated = localStorage.getItem("isAuthenticated") == "true" ? true : false;
+    store.user.token = localStorage.getItem("token");
   }
 
   if (to.meta.requiresAuthAdmin && !(store.user.role == "ROLE_ADMIN")) {
