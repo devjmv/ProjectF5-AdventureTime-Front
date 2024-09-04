@@ -17,14 +17,14 @@ const eventsToShow = computed(() => eventStore.events);
 
 <template>
 
-    <div>
+    <div class="pb-40">
         <div v-if="isLoading">Loading...</div>
         <div v-if="error">{{ error }}</div>
         <ul v-if="!isLoading && !error">
             <li v-for="(event, index) in eventsToShow" :key="index">
                 <Card :id="event.id" :title="event.title" :eventDateTime="event.eventDateTime"
                     :maxParticipants="event.maxParticipants" :participantsCount="event.participantsCount"
-                    :description="event.description" :imageUrl="event.imageUrl" :registered="event.registered"/>
+                    :description="event.description" :imageUrl="event.imageUrl" :registered="event.registered" />
             </li>
         </ul>
     </div>
