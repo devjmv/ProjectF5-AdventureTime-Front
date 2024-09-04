@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        'background-primary': "url('/src/assets/img/background.webp')"
+      },
+      
       variants: {},
 
       fontFamily: {

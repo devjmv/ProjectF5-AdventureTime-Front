@@ -18,7 +18,6 @@ const eventsToShow = computed(() => eventStore.events);
 <template>
 
     <div>
-        <h1>Events</h1>
         <div v-if="isLoading">Loading...</div>
         <div v-if="error">{{ error }}</div>
         <ul v-if="!isLoading && !error">
