@@ -4,9 +4,10 @@ import Event from '@/components/Event.vue';
 </script>
 
 <template>
-  <h1>Home</h1>
+  <div class="w-full bg-background-primary bg-fixed">
   <Carrusel />
   <Event />
+  </div>
 </template>
 
 <style scoped>
