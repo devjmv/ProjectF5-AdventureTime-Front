@@ -6,13 +6,16 @@ import { ref } from 'vue';
 
 const props = defineProps({
   available: Boolean,
-  issubscribe: Boolean,
+  issubscribe: Array,
   eventId: Number,
   userId: Number
 })
 const store = registerUserInEvent()
-const authStore = useAuthStore();
-const issubscribe = ref(props.issubscribe)
+const authStore = useAuthStore()
+const issubscribe = ref(props.issubscribe.some(num => num == props.userId))
+
+
+
 
 const modificarLogin = () => {
   if (loginChange.login == false)
