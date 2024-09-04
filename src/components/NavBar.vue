@@ -7,38 +7,40 @@ import { loginChange } from '../stores/loginChange';
 import IconLogo from './icons/IconLogo.vue';
 import Login from './Login.vue';
 import Register from './Register.vue';
+import { ref } from 'vue';
 
 const router = useRouter()
 const store = useAuthStore()
-const mobileMenuOpen = loginChange.login
+const mobileMenuOpen = ref(false)
 
 const modificarLogin = () => {
     if (loginChange.login == false)
-        loginChange.setLogin(true);
+        loginChange.setLogin(true)
     else
-        loginChange.setLogin(false);
+        loginChange.setLogin(false)
 };
 
 const modificarRegister = () => {
     if (loginChange.register == false)
-        loginChange.setRegister(true);
+        loginChange.setRegister(true)
     else
-        loginChange.setRegister(false);
+        loginChange.setRegister(false)
 };
 
 function logout() {
 
-    store.user.isAuthenticated = false;
-    store.user.id = "";
-    store.user.username = "";
-    store.user.role = "";
+    store.user.isAuthenticated = false
+    store.user.id = ""
+    store.user.username = ""
+    store.user.role = ""
 
-    localStorage.clear();
-    loginChange.setLogin(false);
-    loginChange.setRegister(false);
+    localStorage.clear()
+    loginChange.setLogin(false)
+    loginChange.setRegister(false)
+    mobileMenuOpen.value = false
 
-    const redirectPath = '/home';
-    router.push(redirectPath);
+    const redirectPath = '/home'
+    router.push(redirectPath)
 }
 
 </script>
@@ -99,7 +101,7 @@ function logout() {
                         leave-to-class="transform opacity-0 scale-95">
                         <MenuItems
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <MenuItem v-slot="{ active }">
+                            <!-- <MenuItem v-slot="{ active }">
                             <a href="#"
                                 :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your
                                 Profile</a>
@@ -107,7 +109,7 @@ function logout() {
                             <MenuItem v-slot="{ active }">
                             <a href="#"
                                 :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
-                            </MenuItem>
+                            </MenuItem> -->
                             <MenuItem v-slot="{ active }">
                             <a href="#" @click="logout()"
                                 :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
@@ -149,17 +151,17 @@ function logout() {
                             </RouterLink>
                         </div>
                         <div v-if="!store.user.isAuthenticated" class="py-6">
-                            <a href="#" @click="modificarRegister, mobileMenuOpen = false"
+                            <a href="#" @click="modificarRegister"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Register
                             </a>
                         </div>
                         <div class="py-6">
-                            <RouterLink v-if="store.user.isAuthenticated" to="/logout" @click="mobileMenuOpen = false"
+                            <a href="#" v-if="store.user.isAuthenticated" @click="logout"
                                 class="text-sm font-semibold leading-6 text-gray-900">
-                                Logout</RouterLink>
-                            <a href="#" v-if="!store.user.isAuthenticated"
-                                @click="modificarLogin, mobileMenuOpen = false"
+                                Logout
+                            </a>
+                            <a href="#" v-if="!store.user.isAuthenticated" @click="modificarLogin"
                                 class="text-sm font-semibold leading-6 text-gray-900">
                                 Log in
                             </a>
