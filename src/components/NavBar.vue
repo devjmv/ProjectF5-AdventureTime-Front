@@ -145,7 +145,7 @@ function logout() {
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                 Event</RouterLink>
                             <RouterLink v-if="store.user.isAuthenticated && store.user.role == 'ROLE_ADMIN'"
-                                @click="mobileMenuOpen = false" to="/dashboard/dashboard"
+                                @click="mobileMenuOpen = false" to="/admin/dashboard"
                                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                                 Dashboard
                             </RouterLink>
