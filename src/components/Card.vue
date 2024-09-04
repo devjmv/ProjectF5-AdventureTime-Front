@@ -35,7 +35,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  issubscribe: {
+  registered: {
     type: Array,
     required: true
   }
@@ -57,7 +57,7 @@ const props = defineProps({
         {{ description }}
       </p>
       <div class="flex justify-center mt-10 w-full">
-        <RegisterIn :available="maxParticipants == participantsCount ? false : true" :issubscribe="props.issubscribe" :eventId="props.id" :userId="authStore.user.id" />
+        <RegisterIn :available="maxParticipants == participantsCount ? false : true" :registered="props.registered" :eventId="props.id" :userId="authStore.user.id" />
       </div>
     </div>
   </div>

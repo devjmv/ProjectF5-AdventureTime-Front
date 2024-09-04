@@ -24,7 +24,7 @@ const eventsToShow = computed(() => eventStore.events);
             <li v-for="(event, index) in eventsToShow" :key="index">
                 <Card :id="event.id" :title="event.title" :eventDateTime="event.eventDateTime"
                     :maxParticipants="event.maxParticipants" :participantsCount="event.participantsCount"
-                    :description="event.description" :imageUrl="event.imageUrl" :issubscribe="event.registered"/>
+                    :description="event.description" :imageUrl="event.imageUrl" :registered="event.registered"/>
             </li>
         </ul>
     </div>

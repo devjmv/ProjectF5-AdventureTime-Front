@@ -6,13 +6,13 @@ import { ref } from 'vue';
 
 const props = defineProps({
   available: Boolean,
-  issubscribe: Array,
+  registered: Array,
   eventId: Number,
   userId: Number
 })
 const store = registerUserInEvent()
 const authStore = useAuthStore()
-const issubscribe = ref(props.issubscribe.some(num => num == props.userId))
+const issubscribe = ref(props.registered.some(num => num == props.userId))
 
 
 
