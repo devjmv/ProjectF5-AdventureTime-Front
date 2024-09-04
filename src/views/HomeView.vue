@@ -1,12 +1,13 @@
 <script setup>
 import Carrusel from '@/components/Carrusel.vue';
-import RegisterIn from '@/components/RegisterIn.vue';
+import Event from '@/components/Event.vue';
 </script>
 
 <template>
   <h1>Home</h1>
-  <Carrusel />  
+  <Carrusel />
+  <Event />
 </template>
 
-<style>
+<style scoped>
 </style>
