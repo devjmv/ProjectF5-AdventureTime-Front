@@ -53,8 +53,26 @@ export const useEventStore = defineStore("event", {
     async addEvent(newEvent) {
       this.isLoading = true;
       this.error = null;
+
+      // Crear FormData para manejar los datos y el archivo
+      const formData1 = new FormData();
+      formData1.append("title", newEvent.title);
+      formData1.append("description", newEvent.description);
+      formData1.append("file", newEvent.imageUrl); // El archivo se envía aquí
+      formData1.append(
+        "eventDateTime",
+        newEvent.eventDateTime ? new Date(newEvent.eventDateTime).toISOString() : ""
+      );
+      formData1.append("maxParticipants", newEvent.maxParticipants);
+      formData1.append("isAvailable", newEvent.isAvailable);
+      formData1.append("isFeatured", newEvent.isFeatured);
+
       try {
-        const response = await api.post("/event/add", newEvent);
+        const response = await api.post("/event/add", formData1, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
         this.fetchEvents();
         return response.data;
       } catch (error) {

@@ -6,7 +6,7 @@ const eventStore = useEventStore();
 
 const title = ref('');
 const description = ref('');
-const imageUrl = ref('');
+const imageUrl = ref(null);
 const eventDateTime = ref('');
 const maxParticipants = ref(0);
 const isAvailable = ref(true);
@@ -21,18 +21,17 @@ const registerEvent = async () => {
   errorMessage.value = '';
   successMessage.value = '';
 
-  const newEvent = {
-    title: title.value,
-    description: description.value,
-    imageUrl: imageUrl.value,
-    eventDateTime: eventDateTime.value ? new Date(eventDateTime.value).toISOString() : null,
-    maxParticipants: maxParticipants.value,
-    isAvailable: isAvailable.value,
-    isFeatured: isFeatured.value,
-  };
+  const formData = new FormData();
+  formData.append('title', title.value);
+  formData.append('description', description.value);
+  formData.append('image', imageUrl.value); // Aquí se envía el archivo seleccionado
+  formData.append('eventDateTime', eventDateTime.value ? new Date(eventDateTime.value).toISOString() : '');
+  formData.append('maxParticipants', maxParticipants.value);
+  formData.append('isAvailable', isAvailable.value);
+  formData.append('isFeatured', isFeatured.value);
 
   try {
-    await eventStore.addEvent(newEvent);
+    await eventStore.addEvent(formData);
     clearForm();
     successMessage.value = 'Event added successfully';
   } catch (error) {
@@ -46,7 +45,7 @@ const registerEvent = async () => {
 const clearForm = () => {
   title.value = '';
   description.value = '';
-  imageUrl.value = '';
+  imageUrl.value = null;
   eventDateTime.value = '';
   maxParticipants.value = 0;
   isAvailable.value = true;
@@ -57,6 +56,11 @@ const cancel = () => {
   clearForm();
   errorMessage.value = '';
   successMessage.value = '';
+};
+
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  imageUrl.value = file;
 };
 </script>
 
@@ -118,10 +122,10 @@ const cancel = () => {
             </div>
 
             <div>
-              <label class="text-terciary font-nunito font-bold" for="imageUrl">Image URL *</label>
-              <input v-model="imageUrl" id="imageUrl"
-                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
-                type="text" required placeholder="https://example.com/image.jpg" />
+              <label class="text-terciary font-nunito font-bold" for="imageUrl">Subir Imagen *</label>
+              <input id="imageUrl" type="file" accept="image/jpeg, image/png" @change="handleFileUpload"
+                class="block w-full px-4 py-2 mt-2 text-dark bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
+                required />
             </div>
 
 
@@ -141,21 +145,23 @@ const cancel = () => {
 
             <div>
               <label for="isAvailable" class="text-terciary font-bold">Is Available *</label>
-              <select v-model="isAvailable" id="isAvailable" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+              <select v-model="isAvailable" id="isAvailable" required
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
-  
-            
+
+
             <div>
               <label for="isFeatured" class="text-terciary font-bold">Is Featured *</label>
-              <select v-model="isFeatured" id="isFeatured" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+              <select v-model="isFeatured" id="isFeatured" required
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
-            
+
           </div>
 
           <div class="flex justify-end mt-4 space-x-4 p-6">
