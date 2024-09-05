@@ -112,13 +112,13 @@ const deleteEvent = async () => {
           <div class="flex justify-end pt-2">
             <div class="flex justify-end mt-4 space-x-4">
               <button
-                class="px-4 py-2 text-primary bg-transparent border-2 border-primary rounded-xl hover:bg-primary hover:outline-random-50 hover:text-white"
+                class="px-4 py-2 duration-300 ease-in-out text-primary bg-transparent border-2 border-primary rounded-xl hover:bg-primary hover:outline-random-50 hover:text-white hover:scale-110 hover:delay-300"
                 @click="openDelete = false"
               >
                 Cancel
               </button>
               <button
-                class="px-4 py-2 text-white bg-primary border-2 border-primary rounded-xl hover:bg-transparent hover:outline-primary hover:text-primary"
+                class="px-4 py-2 duration-300 ease-in-out text-white bg-primary border-2 border-primary rounded-xl hover:bg-transparent hover:outline-primary hover:text-primary hover:scale-110 hover:delay-300"
                 @click="deleteEvent"
               >
                 Delete
