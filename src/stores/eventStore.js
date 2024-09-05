@@ -96,11 +96,11 @@ export const useEventStore = defineStore("event", {
     },
 
     applyFilters(events) {
-        if (this.selectedFilters.length === 0) {
-        return events; 
+      if (this.selectedFilters.length === 0) {
+        return events;
       } else {
         return events.filter(event =>
-          this.selectedFilters.includes(event.featured) 
+          this.selectedFilters.includes(event.featured)
         );
       }
     },
