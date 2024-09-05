@@ -1,6 +1,5 @@
 <script setup>
 
-import { defineProps } from 'vue';
 import RegisterIn from './RegisterIn.vue';
 import { useAuthStore } from '@/stores/auth';
 
