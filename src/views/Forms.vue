@@ -16,6 +16,8 @@ const isSubmitting = ref(false);
 const errorMessage = ref('');
 const successMessage = ref('');
 
+const fileBase64String = ref(null);
+
 const registerEvent = async () => {
   isSubmitting.value = true;
   errorMessage.value = '';
@@ -24,7 +26,7 @@ const registerEvent = async () => {
   const newEvent = {
     title: title.value,
     description: description.value,
-    imageUrl: imageUrl.value,
+    imageHash: fileBase64String.value.split(',')[1],
     eventDateTime: eventDateTime.value ? new Date(eventDateTime.value).toISOString() : null,
     maxParticipants: maxParticipants.value,
     isAvailable: isAvailable.value,
@@ -58,8 +60,23 @@ const cancel = () => {
   errorMessage.value = '';
   successMessage.value = '';
 };
-</script>
 
+const onFileChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    // When the file is read, store the Base64 string
+    reader.onload = (e) => {
+      fileBase64String.value = e.target.result;
+    };
+
+    // Read the file as a Data URL (Base64)
+    reader.readAsDataURL(file);
+  }
+};
+</script>
 
 <template>
   <div class="mt-8">
@@ -118,10 +135,10 @@ const cancel = () => {
             </div>
 
             <div>
-              <label class="text-terciary font-nunito font-bold" for="imageUrl">Image URL *</label>
-              <input v-model="imageUrl" id="imageUrl"
-                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 caret-cyan-600 placeholder-slate-400"
-                type="text" required placeholder="https://example.com/image.jpg" />
+              <label class="text-terciary font-nunito font-bold" for="imageUrl">Image *</label>
+              <input ref="upload" type="file" name="file-upload" multiple="" accept="image/jpeg, image/png"
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40  placeholder-slate-400"
+                @change="onFileChange">
             </div>
 
 
@@ -141,21 +158,23 @@ const cancel = () => {
 
             <div>
               <label for="isAvailable" class="text-terciary font-bold">Is Available *</label>
-              <select v-model="isAvailable" id="isAvailable" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+              <select v-model="isAvailable" id="isAvailable" required
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
-  
-            
+
+
             <div>
               <label for="isFeatured" class="text-terciary font-bold">Is Featured *</label>
-              <select v-model="isFeatured" id="isFeatured" required class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
+              <select v-model="isFeatured" id="isFeatured" required
+                class="block w-full px-4 py-2 mt-2 text-dark  bg-transparent border border-secondary rounded-md focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40 ">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
-            
+
           </div>
 
           <div class="flex justify-end mt-4 space-x-4 p-6">
