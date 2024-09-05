@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'background-primary': "url('/src/assets/img/background.webp')"
+        'background-primary': "url('/src/assets/img/background.webp')",
+        'background-eventuser': "url('/src/assets/img/backgroundeventuser.jpg')"
       },
       
       variants: {},

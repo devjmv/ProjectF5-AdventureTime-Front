@@ -39,25 +39,24 @@ const props = defineProps({
     required: true
   }
 });
-
+//:src="props.imageUrl != 'null' ? props.imageUrl : '../assets/img/card_globos.jpg'"
 </script>
 
 <template>
-
   <div
     class="mt-10 flex flex-col md:flex-row items-center justify-center bg-light/70 backdrop-blur border-gray-200 rounded-lg shadow md:max-w-4xl mx-auto">
     <img class="object-cover w-full h-96 md:h-auto md:w-48 rounded-t-lg md:rounded-none md:rounded-s-lg"
       src="../assets/img/card_globos.jpg" alt="">
     <div class="w-full flex flex-col justify-center items-center p-4 leading-normal text-center">
       <h5 class="font-poppins font-bold mb-3 text-xl tracking-tight text-gray-900">
-        {{ title }} {{ eventDateTime }}
+        {{ title }}
       </h5>
       <p class="mb-4 mt-4 font-poppins text-gray-700 text-sm">
         {{ description }}
       </p>
       <div class="flex justify-center mt-10 w-full">
         <RegisterIn :available="maxParticipants == participantsCount ? false : true" :registered="props.registered"
-          :eventId="props.id" :userId="authStore.user.id" :eventDateTime="props.eventDateTime"/>
+          :eventId="props.id" :userId="authStore.user.id" :eventDateTime="props.eventDateTime" />
       </div>
     </div>
   </div>
