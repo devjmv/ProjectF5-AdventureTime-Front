@@ -1,19 +1,16 @@
 <script setup>
 
 import { registerEventStore } from '@/stores/registerEventStore';
-import { useAuthStore } from '@/stores/auth';
 import { computed, onMounted } from 'vue';
 
 const eventStore = registerEventStore(); 
-const authStore = useAuthStore();
 const isLoading = computed(() => eventStore.isLoading);
 const error = computed(() => eventStore.error);
-const registeredEvents = computed(() => eventStore.registeredEvents);
+const events = computed(() => eventStore.events);
+const registeredUsers = computed(() => eventStore.registeredUsers);
 
 onMounted(() => {
-  if (authStore.user.id) {
-    eventStore.fetchRegisteredEvents(authStore.user.id);
-  }
+  eventStore.fetchAllEvents();
 });
 
 </script>
@@ -25,10 +22,15 @@ onMounted(() => {
     <div v-if="isLoading">Loading...</div>
     <div v-if="error">{{ error }}</div>
     <ul v-if="!isLoading && !error">
-      <li v-for="(event, index) in registeredEvents" :key="index">
+      <li v-for="(event, index) in events" :key="index">
         <Card :id="event.id" :title="event.title" :eventDateTime="event.eventDateTime"
           :maxParticipants="event.maxParticipants" :participantsCount="event.participantsCount"
           :description="event.description" :imageUrl="event.imageUrl" :registered="event.registered" />
+          <ul>
+          <li v-for="(user, userIndex) in registeredUsers[event.id]" :key="userIndex">
+            {{ user.name }}
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -36,3 +38,6 @@ onMounted(() => {
 </template>
 
 <style></style>
+
+
+ 
