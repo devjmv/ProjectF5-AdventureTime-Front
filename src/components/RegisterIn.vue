@@ -23,9 +23,6 @@ if (dateEvent < dateNow) {
   outOfDate.value = true
 }
 
-console.log(dateEvent < dateNow);
-
-
 const modificarLogin = () => {
   if (loginChange.login == false)
     loginChange.setLogin(true);
