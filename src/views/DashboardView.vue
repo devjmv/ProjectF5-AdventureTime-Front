@@ -3,8 +3,7 @@ import { ref, computed, onMounted } from "vue";
 import Pagination from "../components/dashboard/Pagination.vue";
 import DeleteModal from "../components/dashboard/DeleteModal.vue";
 import ModifyModal from "../components/dashboard/ModifyModal.vue";
-// import Filter from "../components/Filter.vue";
-import { useEventStore } from '../stores/eventStore.js';;
+import { useEventStore } from '../stores/eventStore.js';
 
 const eventStore = useEventStore();
 const selectedEvent = ref(null);
@@ -41,11 +40,7 @@ function handlePageChange(page) {
 }
 
 onMounted(() => {
-  eventStore.fetchEvents().then(() => {
-    if (eventStore.selectedFilters.length > 0) {
-      eventStore.applyFilters(eventStore.selectedFilters);
-    }
-  });
+  eventStore.fetchEvents(); 
 });
 
 const isDropdownOpen = ref(false);
@@ -54,6 +49,7 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 </script>
+
 
 <template>
   <div class="mt-8">
@@ -166,8 +162,7 @@ const toggleDropdown = () => {
                 </td>
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="text-sm leading-5 text-gray-900">
-                    // TODO: add slots
-                    <!-- {{ event.maxParticipants }} -->
+                    {{ event.participantsCount }}/{{ event.maxParticipants }}
                   </div>
                 </td>
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
