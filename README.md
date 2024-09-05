@@ -1,6 +1,7 @@
 # Adventure Time
 
 Un colectivo de desarrollo de software quiere crear una aplicación web para gestionar sus eventos on-line como talleres, masterclass o webinars. Los usuarios podrán ver la descripción de un evento, apuntarse y desapuntarse. También podrán ver la lista de los eventos a los que se han apuntado. El administrador debe tener las herramientas para la gestión (CRUD) de los eventos.
+uwu
 
 ## Recommended IDE Setup
 
