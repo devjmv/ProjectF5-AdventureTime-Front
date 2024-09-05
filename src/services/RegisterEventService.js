@@ -13,6 +13,11 @@ export default class RegisterEventService {
         this.eventid = eventid
     }
 
+    async getRegisteredEvents(userId) {
+        const response = await this.#repo.getRegisteredEvents(userId);
+        return response;
+    }
+
     async registerEvent() {
         const response = await this.#repo.registerEvent(this.userid, this.eventid)
         return response
@@ -22,5 +27,4 @@ export default class RegisterEventService {
         const response = await this.#repo.unRegisterEvent(this.userid, this.eventid)
         return response
     }
-
 }
