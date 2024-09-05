@@ -25,12 +25,13 @@ export default class AuthRepository {
         }
     }
 
-    async register(credentials) {
+    async register(credentialsRegister) {
         try {
             // Asegúrate de que la URL esté entre comillas
             const response = await axios.post(this.baseUrl + '/register', {
-                "username": credentials.getUsername(),
-                "password": btoa(credentials.getPassword())
+                "username": credentialsRegister.getUsername(),
+                "password": btoa(credentialsRegister.getPassword()),
+                "email": credentialsRegister.getEmail()
             })
 
             return response.data;

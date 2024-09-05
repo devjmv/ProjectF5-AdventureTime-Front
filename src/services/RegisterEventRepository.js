@@ -8,16 +8,17 @@ export default class AuthRepository {
 
     async registerEvent(userid, eventid) {
         try {
-            const response = await axios.post(this.baseUrl + '/rutaRegisterEvent', {
-                userId: userid,
-                eventId: eventid
-            })
-            /* axios.get(this.baseUrl + '/rutaRegisterEvent', {
-                data: {
-                    userId: userid,
-                    eventId: eventid
-                },
-            }) */
+            let headersList = {
+                "Authorization": "Basic " + localStorage.getItem("token")
+            }
+
+            let reqOptions = {
+                url: this.baseUrl + '/participant/' + eventid + '/join/' + userid,
+                method: "POST",
+                headers: headersList,
+            }
+
+            const response = await axios.request(reqOptions);
 
             const data = await response.data
 
@@ -30,16 +31,17 @@ export default class AuthRepository {
 
     async unRegisterEvent(userid, eventid) {
         try {
-            const response = await axios.post(this.baseUrl + '/rutaUnRegisterEvent', {
-                userId: userid,
-                eventId: eventid
-            })
-            /* axios.get(this.baseUrl + '/rutaRegisterEvent', {
-                data: {
-                    userId: userid,
-                    eventId: eventid
-                },
-            }) */
+            let headersList = {
+                "Authorization": "Basic " + localStorage.getItem("token")
+            }
+
+            let reqOptions = {
+                url: this.baseUrl + '/participant/' + eventid + '/unregister/' + userid,
+                method: "DELETE",
+                headers: headersList,
+            }
+
+            const response = await axios.request(reqOptions);
 
             const data = await response.data
 
