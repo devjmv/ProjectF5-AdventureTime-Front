@@ -51,14 +51,14 @@ const props = defineProps({
       src="../assets/img/card_globos.jpg" alt="">
     <div class="w-full flex flex-col justify-center items-center p-4 leading-normal text-center">
       <h5 class="font-poppins font-bold mb-3 text-xl tracking-tight text-gray-900">
-        {{ title }}
+        {{ title }} {{ eventDateTime }}
       </h5>
       <p class="mb-4 mt-4 font-poppins text-gray-700 text-sm">
         {{ description }}
       </p>
       <div class="flex justify-center mt-10 w-full">
         <RegisterIn :available="maxParticipants == participantsCount ? false : true" :registered="props.registered"
-          :eventId="props.id" :userId="authStore.user.id" />
+          :eventId="props.id" :userId="authStore.user.id" :eventDateTime="props.eventDateTime"/>
       </div>
     </div>
   </div>

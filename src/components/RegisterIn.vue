@@ -8,13 +8,22 @@ const props = defineProps({
   available: Boolean,
   registered: Array,
   eventId: Number,
-  userId: Number
+  userId: Number,
+  eventDateTime: Date
 })
 const store = registerUserInEvent()
 const authStore = useAuthStore()
 const issubscribe = ref(props.registered.some(num => num == props.userId))
+const outOfDate = ref(false)
 
+const dateEvent = new Date(props.eventDateTime);
+const dateNow = new Date();
 
+if (dateEvent < dateNow) {
+  outOfDate.value = true
+}
+
+console.log(dateEvent < dateNow);
 
 
 const modificarLogin = () => {
@@ -54,18 +63,21 @@ async function unSubscribe() {
 </script>
 
 <template>
-  <button v-if="!available" class="px-4 py-2 text-sm text-center text-dark bg-gray-200 rounded-md disabled">
+  <button v-if="outOfDate" class="px-4 py-2 text-sm text-center text-dark bg-gray-200 rounded-md disabled">
+    Out of date
+  </button>
+  <button v-if="!outOfDate && !available" class="px-4 py-2 text-sm text-center text-dark bg-gray-200 rounded-md disabled">
     Full seats
   </button>
-  <button v-if="available && !authStore.user.isAuthenticated" @click="modificarLogin"
+  <button v-if="!outOfDate && available && !authStore.user.isAuthenticated" @click="modificarLogin"
     class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Log to subscribe
   </button>
-  <button v-if="available && authStore.user.isAuthenticated && !issubscribe" @click="subscribe"
+  <button v-if="!outOfDate && available && authStore.user.isAuthenticated && !issubscribe" @click="subscribe"
     class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Subscribe
   </button>
-  <button v-if="available && authStore.user.isAuthenticated && issubscribe" @click="unSubscribe"
+  <button v-if="!outOfDate && available && authStore.user.isAuthenticated && issubscribe" @click="unSubscribe"
     class="px-4 py-2 text-sm text-center text-white bg-primary rounded-md focus:outline-none hover:bg-secondary hover:text-dark">
     Unsubscribe
   </button>
