@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import { loginChange } from '@/stores/loginChange';
 import { useAuthStore } from '@/stores/auth.js'
@@ -7,6 +7,7 @@ import IconLogo from './icons/IconLogo.vue'
 const username = ref('')
 const password = ref('')
 const passwordAgain = ref('')
+const email = ref('')
 const textAlert = ref("")
 const textSusses = ref("")
 
@@ -20,30 +21,30 @@ const modificarLogin = () => {
 };
 
 async function register() {
-    if (username.value != '' && password.value != '')
-        if (password.value == passwordAgain.value) {
+    if (username.value !== '' && password.value !== '' && email.value !== '') {
+        if (password.value === passwordAgain.value) {
             try {
-                const response = await store.register(username.value, password.value)
+                const response = await store.register(username.value, email.value, password.value);
 
-                if (response.message == "Register") {
-                    //aqui poner que revice su coprreo!
-                    textSusses.value = "Correctly added the user " + response.username
-                    textAlert.value = "";
-                    username.value = "";
-                    password.value = "";
-                    passwordAgain.value = "";
+                if (response.message == "Register successful") {
+                    textSusses.value = `Correctly added the user ${response.username}`;
+                    textAlert.value = '';
+                    username.value = '';
+                    password.value = '';
+                    passwordAgain.value = '';
+                    email.value = '';
+                } else {
+                    textAlert.value = 'There was a problem with the registration!';
                 }
-                else
-                    textAlert.value = "There was a problem with the registration!";
-
             } catch (error) {
-                textAlert.value = "Error trying to register, please try again.";
+                textAlert.value = 'Error trying to register, please try again.';
             }
+        } else {
+            textAlert.value = 'Passwords do not match!';
         }
-        else
-            textAlert.value = "Password not Macht!"
-    else
-        textAlert.value = "User or Password not by null!"
+    } else {
+        textAlert.value = 'Username, email, or password cannot be null!';
+    }
 }
 </script>
 <template>
@@ -70,6 +71,11 @@ async function register() {
                 data-dismissible="alert">
                 <div class="mr-12">{{ textSusses }}</div>
             </div>
+
+            <label class="block mt-3">
+                <input v-model="email" type="email" placeholder="Email"
+                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gris-300 bg-transparent border border-primary rounded-md focus:ring-primary focus:outline-secondary focus:ring focus:ring-opacity-20">
+            </label>
 
             <label class="block mt-3">
                 <input v-model="password" type="password" placeholder="Password"
