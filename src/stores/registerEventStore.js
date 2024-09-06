@@ -1,30 +1,28 @@
-import RegisterEventService from "@/services/RegisterEventService";
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import axios from "axios";
 
-export const registerEventStore = defineStore("event", () => {
-  const events = ref([]);
-  const registeredUsers = ref({});
-  const isLoading = ref(false);
-  const error = ref(null);
+const BASE_URL = import.meta.env.VITE_API_ENDPOINT;
 
-  const service = new RegisterEventService();
+export const registerEventStore = defineStore('userEvent', {
+  state: () => ({
+    event: [],
+    isLoading: false,
+    error: null,
+  }),
 
-  async function fetchAllEvents() {
-    isLoading.value = true;
-    error.value = null;
-    try {
-      events.value = await service.getAllEvents();
-      for (const event of events.value) {
-        registeredUsers.value[event.id] = await service.getRegisteredUsers(event.id);
+  actions: {
+    async fetchEvents() {
+      this.isLoading = true;
+      this.error = null;
+      try {
+        const response = await axios.get(`${BASE_URL}/event/all`);
+        this.events = response.data;
+      } catch (error) {
+        this.error = 'Error fetching events: ' + error.message;
+        console.error(this.error);
+      } finally {
+        this.isLoading = false;
       }
-    } catch (err) {
-      error.value = "Error fetching events: " + err.message;
-      console.error(error.value);
-    } finally {
-      isLoading.value = false;
     }
   }
-
-  return { events, registeredEvents, isLoading, error, fetchAllEvents };
-});
+})

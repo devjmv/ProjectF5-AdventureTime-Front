@@ -8,12 +8,14 @@ const props = defineProps({
   available: Boolean,
   registered: Array,
   eventId: Number,
-  userId: Number,
-  eventDateTime: Date
+  userId: String,
+  eventDateTime: String
 })
+
+const numero = Number(props.userId);
 const store = registerUserInEvent()
 const authStore = useAuthStore()
-const issubscribe = ref(props.registered.some(num => num == props.userId))
+const issubscribe = ref(props.registered.some(num => num == numero))
 const outOfDate = ref(false)
 
 const dateEvent = new Date(props.eventDateTime);
