@@ -1,23 +1,18 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView, useRoute } from 'vue-router';
+import NavBar from './components/NavBar.vue';
+import { computed } from 'vue';
+
+const route = useRoute();
+const hiddenPaths = ["/admin", "/admin/forms", "/admin/dashboard"];
+
+const showNavbar = computed(() => {
+  return !hiddenPaths.includes(route.path);
+});
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" rc="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+  <NavBar v-if="showNavbar" />
   <RouterView />
 </template>
-
-

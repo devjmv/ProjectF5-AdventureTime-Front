@@ -1,9 +1,14 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import Carrusel from '@/components/Carrusel.vue';
+import Event from '@/components/Event.vue';
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="w-full bg-background-primary bg-fixed">
+  <Carrusel />
+  <Event />
+  </div>
 </template>
+
+<style scoped>
+</style>
